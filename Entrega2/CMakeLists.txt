@@ -1,15 +1,24 @@
- 
-cmake_minimum_required(VERSION 3.5)
+# CMakeLists.txt - Configuración de CMake para el proyecto tcp_chat_simple
+# Genera dos ejecutables: server y client
 
-set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_STANDARD 17)
+cmake_minimum_required(VERSION 3.16)
+project(tcp_chat_simple)
+
+# Usar C++11
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-project(server LANGUAGES CXX)
-add_executable(server utils.h utils.cpp server.cpp clientManager.cpp clientManager.h)
-target_link_libraries(server pthread)
+# Flags de compilación
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wall")
 
+# Ejecutable del servidor
+add_executable(server server.cpp)
 
-project(client LANGUAGES CXX)
-add_executable(client utils.h utils.cpp client.cpp clientManager.cpp clientManager.h)
-target_link_libraries(client pthread)
+# Ejecutable del cliente
+add_executable(client client.cpp)
+
+# Mensajes informativos
+message(STATUS "Configuración completada:")
+message(STATUS "  - Ejecutable servidor: server")
+message(STATUS "  - Ejecutable cliente: client")
+message(STATUS "  - Estándar C++: ${CMAKE_CXX_STANDARD}")
