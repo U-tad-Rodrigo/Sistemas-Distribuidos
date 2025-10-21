@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="AWS UBUNTU (7145cbe9-7212-436c-afe1-d450af7564b1)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.gJ4gxHhksT/Entrega1" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug_ec2" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug_ec2" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-opengl" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-opengl" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
