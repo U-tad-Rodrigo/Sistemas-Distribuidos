@@ -67,6 +67,19 @@ void broadcast(const string& mensaje, int idEmisor) {
     }
 }
 
+// Función para enviar mensaje privado a un cliente específico
+bool enviarMensajePrivado(int idDestinatario, const string& mensaje, int idEmisor) {
+    lock_guard<mutex> lock(clientesMutex);
+    for (const auto& cliente : clientesConectados) {
+        if (cliente.id == idDestinatario) {
+            string mensajePrivado = "[PRIVADO] cliente " + to_string(idEmisor) + ": " + mensaje + "\n";
+            send(cliente.socket, mensajePrivado.c_str(), mensajePrivado.length(), 0);
+            return true;
+        }
+    }
+    return false;
+}
+
 // Función para obtener la lista de IDs conectados
 string obtenerListaUsuarios() {
     lock_guard<mutex> lock(clientesMutex);
@@ -135,6 +148,32 @@ void manejarCliente(int clientSocket, int clientId) {
             // Listar usuarios conectados
             string listaUsuarios = obtenerListaUsuarios() + "\n";
             send(clientSocket, listaUsuarios.c_str(), listaUsuarios.length(), 0);
+        }
+        else if (mensaje[0] == '@') {
+            // Mensaje privado: formato @ID mensaje
+            size_t espacioPos = mensaje.find(' ');
+            if (espacioPos != string::npos && espacioPos > 1) {
+                string idStr = mensaje.substr(1, espacioPos - 1);
+                string textoMensaje = mensaje.substr(espacioPos + 1);
+
+                try {
+                    int idDestinatario = stoi(idStr);
+
+                    if (enviarMensajePrivado(idDestinatario, textoMensaje, clientId)) {
+                        string confirmacion = "Servidor: mensaje privado enviado a cliente " + idStr + "\n";
+                        send(clientSocket, confirmacion.c_str(), confirmacion.length(), 0);
+                    } else {
+                        string error = "Servidor: cliente " + idStr + " no está conectado\n";
+                        send(clientSocket, error.c_str(), error.length(), 0);
+                    }
+                } catch (...) {
+                    string error = "Servidor: formato incorrecto. Usa: @ID mensaje\n";
+                    send(clientSocket, error.c_str(), error.length(), 0);
+                }
+            } else {
+                string error = "Servidor: formato incorrecto. Usa: @ID mensaje\n";
+                send(clientSocket, error.c_str(), error.length(), 0);
+            }
         }
         else {
             // Mensaje normal: hacer broadcast a otros clientes

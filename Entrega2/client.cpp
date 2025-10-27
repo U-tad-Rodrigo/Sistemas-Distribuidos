@@ -100,6 +100,7 @@ int main(int argc, char** argv) {
     cout << "  - Escribe un mensaje para enviarlo" << endl;
     cout << "  - 'usuarios' para ver clientes conectados" << endl;
     cout << "  - 'exit' para desconectar" << endl;
+    cout << "  - '@ID mensaje' para mensaje privado" << endl;
     cout << "========================================" << endl << endl;
 
     // Crear hilo para recibir mensajes del servidor
