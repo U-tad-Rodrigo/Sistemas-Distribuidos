@@ -5,13 +5,11 @@
       <paths name="AWS UBUNTU (7145cbe9-7212-436c-afe1-d450af7564b1)">
         <serverdata>
           <mappings>
-            <mapping deploy="/Entrega2" local="$PROJECT_DIR$" />
+            <mapping deploy="/tmp/tmp.UHXgh3cLuz/EjemploRPC_Persona" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug_ec2" />
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug_ec2" />
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-opengl" />
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-opengl" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-ec2_aws" />
           </excludedPaths>
         </serverdata>
       </paths>
