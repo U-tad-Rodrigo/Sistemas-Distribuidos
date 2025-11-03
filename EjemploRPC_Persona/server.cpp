@@ -1,8 +1,6 @@
 #include "utils.h"
 #include <iostream>
-#include <string>
 #include <thread>
-#include <list>
 #include "clientManager.h"
 
 // crear conexion:
@@ -24,10 +22,9 @@ int main(int argc, char** argv)
 {
 	
 	//init server
-	int serverSocketID=initServer(3001);
-	std::vector<unsigned char> buffer;
+	int serverSocketID=initServer(5553);
+
 	//esperar conexion
-	
 	while(1){
 		while(!checkClient()) usleep(100);
 		
