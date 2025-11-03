@@ -1,0 +1,7 @@
+#ifndef EJEMPLORPC_PERSONA_SERVER_H
+#define EJEMPLORPC_PERSONA_SERVER_H
+
+#include <vector>
+
+#endif //EJEMPLORPC_PERSONA_SERVER_H
+

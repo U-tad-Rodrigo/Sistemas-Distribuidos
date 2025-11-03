@@ -5,6 +5,20 @@
 #include <list>
 #include "clientManager.h"
 
+// crear conexion:
+
+    // initClient(IP, PORT) // Conecta un cliente con un servidor
+
+    // initServer(PORT) // Crea server que escucha en ese puerto
+
+    // sendMSG(id, buffer)
+        // id = identificador destino (cliente o servidor)
+        // buffer = Datos a enviar
+
+    // recvMSG(id, buffer)
+        // id = identificador origen (cliente o servidor)
+        // buffer = Datos a recibir
+
 
 int main(int argc, char** argv)
 {

@@ -9,6 +9,8 @@
           </mappings>
           <excludedPaths>
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-opengl" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-opengl" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-ec2_aws" />
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-ec2_aws" />
           </excludedPaths>
         </serverdata>
