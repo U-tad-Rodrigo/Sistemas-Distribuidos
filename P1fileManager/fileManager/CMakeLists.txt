@@ -14,13 +14,13 @@ set_target_properties(FileManager PROPERTIES
 )
 
 project(server LANGUAGES CXX)
-add_executable(server utils.h utils.cpp server.cpp clientManager.h clientManager.cpp)
+add_executable(server utils.h utils.cpp server.cpp clientManager.h clientManager.cpp filemanager.h)
 target_link_libraries(server pthread  FileManager stdc++fs)
 
 
 
 project(client LANGUAGES CXX)
-add_executable(client utils.h utils.cpp main_fm.cpp clientManager.h distributedFileManager.cpp filemanager.cpp)
+add_executable(client utils.h utils.cpp main_fm.cpp clientManager.h distributedFileManager.cpp filemanager.h)
 target_link_libraries(client pthread stdc++fs)
 
 
