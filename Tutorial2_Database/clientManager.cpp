@@ -12,6 +12,21 @@ void clientManager::resolveClientMessages(int clientId){
 	//switch type of the packet
 		switch(type){
 		//type login
+			case addRecordSetF: {
+				//haz lo que tenga que hacer
+				string p1;
+				vector<string> p2;
+				p1.resize(unpack<int>(buffer));
+				unpackv(buffer, (char*)p1.data(), (int)p1.size());
+				p2.resize(unpack<int>(buffer));
+				for (auto &dato: p2) {
+					dato.resize(unpack<int>(buffer));
+					unpackv(buffer, (char*)dato.data(), (int)dato.size());
+				}
+				bool res= instanciasDatabase[clientId].addRecordSet(p1,p2);
+				buffer.clear();
+				pack(buffer,res);
+			}
 			default:
 			break;
 		}

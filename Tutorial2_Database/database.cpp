@@ -2,21 +2,21 @@
 
 
 database::database(string name){
-	this->name=name;	
+	this->name=std::move(name);
 }
 
-bool database::addRecord(string key,string data){
-	
+bool database::addRecord(const string& key, const string& data){
+
 	//get the vector of data by key
-	auto dataVec=this->dataStorage[key];
+	auto& dataVec=this->dataStorage[key];
 		//search if data is duplicated
 	bool duplicated=false;
-	for(auto d : dataVec) 
+	for(const auto& d : dataVec)
 	{
 		duplicated|= (d==data);
 	}
-	
-	if(duplicated) 
+
+	if(duplicated)
 		return false;
 	else
 	{
@@ -25,29 +25,27 @@ bool database::addRecord(string key,string data){
 	}
 }
 
-bool database::addRecordSet(string key,vector<string> dataSet){
-	
+bool database::addRecordSet(const string& key, const vector<string>& dataSet){
+
 	bool duplicated=false;
-	for(auto d: dataSet)
-		duplicated!=addRecord(key,d);
+	for(const auto& d: dataSet)
+		duplicated|=addRecord(key,d);
 	return duplicated;
-	
+
 }
-string database::getRecord(string key,int position)
+string database::getRecord(const string& key, int position)
 {
-	string res="";
-	
+	string res;
+
 	if(this->dataStorage[key].size() > position)
 		res=this->dataStorage[key][position];
-	
+
 	return res;
 }
 
 database::~database(){
-	
+
 	cout<<"Destroying "<<name<<"\n";
-	
+
 }
-
-
 
