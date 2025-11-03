@@ -18,7 +18,7 @@ add_executable(server utils.h utils.cpp server.cpp clientManager.h clientManager
 target_link_libraries(server pthread  FileManager stdc++fs)
 
 
-#Replace "client.cpp" with "main_fm.cpp"
+
 project(client LANGUAGES CXX)
 add_executable(client utils.h utils.cpp main_fm.cpp clientManager.h distributedFileManager.cpp filemanager.cpp)
 target_link_libraries(client pthread stdc++fs)
