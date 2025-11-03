@@ -1,0 +1,134 @@
+╔════════════════════════════════════════════════════════════════════════╗
+║                  PRÁCTICA 1 - ESTADO DEL PROYECTO                      ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+✅ BASE DEL PROYECTO CONFIGURADA Y LISTA PARA EMPEZAR
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ ARCHIVOS PROPORCIONADOS (NO MODIFICAR)                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│ ✅ filemanager.h         - Interfaz de la clase FileManager            │
+│ ✅ libFileManager.a      - Implementación compilada                     │
+│ ✅ main_fm.cpp           - Programa de prueba (FUNCIONAL)               │
+│ ✅ utils.h/cpp           - Funciones de red                             │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ ARCHIVOS PARA IMPLEMENTAR                                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│ 📝 server.cpp            - Servidor distribuido (plantilla creada)      │
+│ 📝 client.cpp            - Cliente distribuido (plantilla creada)       │
+│ 📝 clientManager.h       - Gestor de clientes (enum actualizado)        │
+│ 📝 clientManager.cpp     - Lógica del servidor (función definida)       │
+│ 📝 distributedFileManager.cpp - Proxy del FileManager (archivo creado)  │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ CONFIGURACIÓN                                                            │
+├─────────────────────────────────────────────────────────────────────────┤
+│ ✅ CMakeLists.txt        - CORREGIDO (no más duplicados)                │
+│    - server    → server.cpp                                             │
+│    - client    → client.cpp                                             │
+│    - fileManager → main_fm.cpp (programa de prueba)                     │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ DOCUMENTACIÓN Y AYUDA                                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│ 📖 README.md             - Documentación completa del proyecto          │
+│ 📖 GUIA_INICIO.md        - Guía paso a paso para empezar                │
+│ 📖 EJEMPLOS.cpp          - Ejemplos de código comentados                │
+│ 📖 RESUMEN.txt           - Este archivo                                 │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ DIRECTORIO DE PRUEBAS                                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│ ✅ FileManagerDir/       - Directorio para archivos (existe)            │
+│ ✅ FileManagerDir/test.txt - Archivo de prueba creado                   │
+└─────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│ PROTOCOLO DE MENSAJES DEFINIDO                                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│ ✅ MSG_CONSTRUCTOR        - Crear instancia                             │
+│ ✅ MSG_LIST_FILES         - Listar archivos                             │
+│ ✅ MSG_LIST_FILES_RESPONSE - Respuesta con lista                        │
+│ ✅ MSG_READ_FILE          - Leer archivo                                │
+│ ✅ MSG_READ_FILE_RESPONSE - Respuesta con contenido                     │
+│ ✅ MSG_WRITE_FILE         - Escribir archivo                            │
+│ ✅ MSG_WRITE_FILE_RESPONSE - Confirmación de escritura                  │
+│ ✅ MSG_ACK                - Confirmación genérica                       │
+│ ✅ MSG_ERROR              - Mensaje de error                            │
+└─────────────────────────────────────────────────────────────────────────┘
+
+╔════════════════════════════════════════════════════════════════════════╗
+║                         PRÓXIMOS PASOS                                 ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+1️⃣  LEE LA DOCUMENTACIÓN
+    → Abre GUIA_INICIO.md para ver el plan de implementación
+    → Revisa EJEMPLOS.cpp para ver código de referencia
+
+2️⃣  PRUEBA EL PROGRAMA ORIGINAL
+    → Compila y ejecuta ./fileManager para entender cómo funciona
+    → Prueba comandos: ls, lls, upload, download
+
+3️⃣  IMPLEMENTA EL SERVIDOR (server.cpp)
+    → Iniciar servidor en un puerto
+    → Esperar conexiones
+    → Crear thread para cada cliente
+
+4️⃣  IMPLEMENTA LA LÓGICA DEL SERVIDOR (clientManager.cpp)
+    → Recibir peticiones del cliente
+    → Ejecutar operaciones en FileManager local
+    → Enviar respuestas
+
+5️⃣  IMPLEMENTA EL CLIENTE (client.cpp)
+    → Conectar al servidor
+    → Replicar interfaz de main_fm.cpp
+    → Enviar peticiones en lugar de ejecutar localmente
+
+6️⃣  PRUEBA LA COMUNICACIÓN
+    → Terminal 1: ./server
+    → Terminal 2: ./client
+    → Verifica que funcione igual que ./fileManager
+
+╔════════════════════════════════════════════════════════════════════════╗
+║                      COMPILACIÓN Y EJECUCIÓN                           ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+En Linux/WSL:
+    cd cmake-build-debug-aws-ubuntu
+    make
+    ./server      # Terminal 1
+    ./client      # Terminal 2
+    ./fileManager # Terminal 3 (referencia)
+
+En Windows con MinGW/MSYS:
+    mkdir build
+    cd build
+    cmake .. -G "MinGW Makefiles"
+    mingw32-make
+    server.exe    # Terminal 1
+    client.exe    # Terminal 2
+
+╔════════════════════════════════════════════════════════════════════════╗
+║                           IMPORTANTE                                   ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+⚠️  NO MODIFICAR: filemanager.h, libFileManager.a, main_fm.cpp
+✅  SÍ MODIFICAR: server.cpp, client.cpp, clientManager.cpp/h
+✅  AÑADIR TU NOMBRE en comentarios de cada archivo editado
+✅  El directorio FileManagerDir debe existir donde ejecutes los programas
+
+╔════════════════════════════════════════════════════════════════════════╗
+║                      ERRORES ACTUALES: NINGUNO                         ║
+╚════════════════════════════════════════════════════════════════════════╝
+
+✅ CMakeLists.txt: Sin errores
+✅ Archivos .cpp: Sin errores críticos (solo warnings menores)
+✅ Archivos .h: Sin errores críticos
+
+🎯 EL PROYECTO ESTÁ LISTO PARA EMPEZAR A IMPLEMENTAR 🎯
+
