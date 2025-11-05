@@ -12,10 +12,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -Wall")
 
 # Ejecutable del servidor
-add_executable(server server.cpp)
+add_executable(server server.cpp clientManager.cpp utils.cpp)
 
 # Ejecutable del cliente
-add_executable(client client.cpp)
+add_executable(client client.cpp clientManager.cpp utils.cpp)
 
 # Mensajes informativos
 message(STATUS "Configuración completada:")

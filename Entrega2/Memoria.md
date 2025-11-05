@@ -27,8 +27,8 @@ $ ./server
 ============================================
 Puerto: 5000
 ============================================
-[SERVIDOR] Escuchando en puerto 5000...
-[SERVIDOR] Esperando conexiones de clientes...
+Servidor abriendo puerto...
+Puerto abierto, esperando conexiones...
 ============================================
 
 ```
@@ -44,7 +44,7 @@ $ ./client
        CLIENTE TCP INTERACTIVO
 ========================================
 Conectando a 127.0.0.1:5000...
-¡Conexión establecida!
+Conexion establecida!
 ========================================
 Comandos disponibles:
   - Escribe un mensaje para enviarlo
@@ -63,7 +63,7 @@ $ ./client
        CLIENTE TCP INTERACTIVO
 ========================================
 Conectando a 127.0.0.1:5000...
-¡Conexión establecida!
+Conexion establecida!
 ========================================
 Comandos disponibles:
   - Escribe un mensaje para enviarlo
@@ -82,7 +82,7 @@ $ ./client
        CLIENTE TCP INTERACTIVO
 ========================================
 Conectando a 127.0.0.1:5000...
-¡Conexión establecida!
+Conexion establecida!
 ========================================
 Comandos disponibles:
   - Escribe un mensaje para enviarlo
@@ -104,20 +104,19 @@ $ ./server
 ============================================
 Puerto: 5000
 ============================================
-[SERVIDOR] Escuchando en puerto 5000...
-[SERVIDOR] Esperando conexiones de clientes...
+Servidor abriendo puerto...
+Puerto abierto, esperando conexiones...
 ============================================
 
-[SERVIDOR] Cliente 1 conectado (socket: 4)
-[SERVIDOR] Cliente 2 conectado (socket: 5)
-[SERVIDOR] Cliente 3 conectado (socket: 6)
-cliente 1: Soy el cliente 1, hola!
-cliente 2: Soy el cliente 2, hola!
-cliente 3: @1 Soy el cliente 3, mensaje privado a 1
-cliente 1: usuarios
-cliente 3: exit
-cliente 2: exit
-cliente 1: exit
+[SERVIDOR] Cliente ID: 0 conectado
+[SERVIDOR] Cliente ID: 1 conectado
+[SERVIDOR] Cliente ID: 2 conectado
+cliente 0: Soy el cliente 1, hola!
+cliente 1: Soy el cliente 2, hola!
+cliente 2: Hola desde el cliente 3
+[SERVIDOR] Cliente 2 desconectado
+[SERVIDOR] Cliente 1 desconectado
+[SERVIDOR] Cliente 0 desconectado
 ```
 
 **Terminal Cliente 1:**
@@ -127,7 +126,7 @@ $ ./client
        CLIENTE TCP INTERACTIVO
 ========================================
 Conectando a 127.0.0.1:5000...
-¡Conexión establecida!
+Conexion establecida!
 ========================================
 Comandos disponibles:
   - Escribe un mensaje para enviarlo
@@ -136,22 +135,16 @@ Comandos disponibles:
   - '@ID mensaje' para mensaje privado
 ========================================
 
-> cliente 2 se ha conectado
-cliente 3 se ha conectado
-Soy el cliente 1, hola!
-Soy el cliente 1, hola!
-> Servidor: mensaje recibido correctamente.
-cliente 2: Soy el cliente 2, hola!
-[PRIVADO] cliente 3: Soy el cliente 3, mensaje privado a 1
+> Soy el cliente 1, hola!
+Servidor: mensaje recibido correctamente.
+> cliente 1: Soy el cliente 2, hola!
+cliente 2: Hola desde el cliente 3
 usuarios
-usuarios
-> conectados: 1,2,3
-cliente 3 se ha desconectado
-cliente 2 se ha desconectado
-exit
-exit
-Cerrando conexión...
-Servidor: desconectando...
+conectados: 0,1,2
+> @2 Este es un mensaje privado para ti
+Servidor: mensaje privado enviado a cliente 2
+> exit
+Cerrando conexion...
 Desconectado.
 ```
 
@@ -162,7 +155,7 @@ $ ./client
        CLIENTE TCP INTERACTIVO
 ========================================
 Conectando a 127.0.0.1:5000...
-¡Conexión establecida!
+Conexion establecida!
 ========================================
 Comandos disponibles:
   - Escribe un mensaje para enviarlo
@@ -171,16 +164,13 @@ Comandos disponibles:
   - '@ID mensaje' para mensaje privado
 ========================================
 
-> cliente 3 se ha conectado
-cliente 1: Soy el cliente 1, hola!
+> cliente 0: Soy el cliente 1, hola!
 Soy el cliente 2, hola!
-Soy el cliente 2, hola!
-> Servidor: mensaje recibido correctamente.
-cliente 3 se ha desconectado
+Servidor: mensaje recibido correctamente.
+> cliente 2: Hola desde el cliente 3
+[PRIVADO] cliente 0: Este es un mensaje privado para ti
 exit
-exit
-Cerrando conexión...
-Servidor: desconectando...
+Cerrando conexion...
 Desconectado.
 ```
 
@@ -191,7 +181,7 @@ $ ./client
        CLIENTE TCP INTERACTIVO
 ========================================
 Conectando a 127.0.0.1:5000...
-¡Conexión establecida!
+Conexion establecida!
 ========================================
 Comandos disponibles:
   - Escribe un mensaje para enviarlo
@@ -200,15 +190,12 @@ Comandos disponibles:
   - '@ID mensaje' para mensaje privado
 ========================================
 
-> cliente 1: Soy el cliente 1, hola!
-cliente 2: Soy el cliente 2, hola!
-@1 Soy el cliente 3, mensaje privado a 1
-@1 Soy el cliente 3, mensaje privado a 1
-> Servidor: mensaje privado enviado a cliente 1
-exit
-exit
-Cerrando conexión...
-Servidor: desconectando...
+> cliente 0: Soy el cliente 1, hola!
+cliente 1: Soy el cliente 2, hola!
+Hola desde el cliente 3
+Servidor: mensaje recibido correctamente.
+> exit
+Cerrando conexion...
 Desconectado.
 
 ```
@@ -224,27 +211,19 @@ Para mandar un mensaje a un cliente concreto escribes:
 
 Ejemplo: `@2 Hola, esto es privado`
 
-Cuando el servidor ve que el mensaje empieza con `@`, coge el número que viene después, busca al cliente con ese ID y le envía el mensaje solo a él. El que lo recibe lo ve con `[PRIVADO]` delante.
+El servidor busca al cliente con ese ID y le envía el mensaje solo a él. El que lo recibe lo ve con `[PRIVADO]` delante.
 
-**Cómo lo hace el servidor:**
-- Mira si el mensaje empieza por '@'
-- Saca el ID que viene después
-- Busca ese cliente en la lista
-- Si existe, le manda el mensaje solo a él
-- Si no existe, le dice al que lo envió que ese cliente no está
+### Comando usuarios
+
+Si escribes `usuarios` el servidor te manda la lista de IDs conectados en ese momento.
+
+### Desconexión
+
+Cuando escribes `exit`, el cliente cierra la conexión y el servidor lo quita de la lista. Los demás siguen funcionando normal.
 
 
 ## Resumen
 
-Todo funciona bien con varios clientes conectados. Los clientes pueden:
-- Enviar mensajes que ven todos
-- Mandar mensajes privados a uno solo
-- Ver quién está conectado
-- Desconectarse sin afectar a los demás
-
-El servidor:
-- Maneja varios clientes a la vez
-- Mantiene la lista actualizada
-- Avisa cuando alguien se conecta
+El programa funciona con varios clientes a la vez. Cada cliente puede mandar mensajes a todos, mensajes privados a uno solo, ver quién está conectado y desconectarse cuando quiera. El servidor gestiona todo usando hilos.
 
 
