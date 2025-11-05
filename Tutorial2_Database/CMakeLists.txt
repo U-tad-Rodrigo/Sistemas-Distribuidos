@@ -10,7 +10,7 @@ add_executable(userInterfaceLocal userInterfaceLocal.cpp database.cpp database.h
 target_link_libraries(userInterfaceLocal pthread)
 
 project(userInterfaceClient LANGUAGES CXX)
-add_executable(userInterfaceClient userInterfaceLocal.cpp database.cpp database.h utils.h utils.cpp)
+add_executable(userInterfaceClient userInterfaceLocal.cpp distributedDatabase.cpp database.h utils.h utils.cpp)
 target_link_libraries(userInterfaceClient pthread)
 
 project(server LANGUAGES CXX)

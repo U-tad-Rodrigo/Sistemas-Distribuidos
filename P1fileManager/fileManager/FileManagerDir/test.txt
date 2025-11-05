@@ -1,3 +1,0 @@
-Este es un archivo de prueba para el FileManager.
-Puedes usar este archivo para probar las funciones de lectura y escritura.
-

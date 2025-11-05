@@ -1,3 +1,7 @@
+/*Rodrigo Fernández
+* 05/11/2205
+ */
+
 #pragma once
 #include <iostream>
 #include <string>

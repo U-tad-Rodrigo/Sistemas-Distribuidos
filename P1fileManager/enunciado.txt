@@ -1,3 +1,4 @@
+Programación de sistemas distribuidos
 Práctica 1: Objetos remotos
 En esta primera práctica se suministra un programa con la siguiente funcionalidad:
 File Manager

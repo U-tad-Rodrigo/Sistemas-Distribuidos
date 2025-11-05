@@ -1,5 +1,4 @@
-#ifndef DATABASE_H
-#define DATABASE_H
+#pragma once
 
 #include <iostream>
 #include <map>
@@ -14,15 +13,13 @@ class database{
 		map<string,vector<string>> dataStorage;
 		string name;
 	public:
-		explicit database(string name);
+		database(string name);
 		database() :database("") {};
-
-		bool addRecord(const string& key, const string& data);
-		bool addRecordSet(const string& key, const vector<string>& dataSet);
-		string getRecord(const string& key, int index);
-
+		
+		bool addRecord(string key,string data);
+		bool addRecordSet(string key,vector<string> dataSet);
+		string getRecord(string key,int index);
+		
 		~database();
 };
-
-#endif // DATABASE_H
 

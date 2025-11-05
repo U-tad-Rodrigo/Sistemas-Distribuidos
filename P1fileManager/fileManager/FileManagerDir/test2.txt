@@ -1,0 +1,7 @@
+This is another sample text file located in the FileManagerDir directory. It also contains random
+text for additional testing purposes.
+This file is intended to help test the file management functionalities of the distributed systems programming practice.
+It can be used to verify reading and writing operations in the FileManagerDir directory.
+Feel free to modify or delete this file as needed during your testing.
+The content of this file is purely for testing and does not hold any significant meaning.
+End of the sample text file.

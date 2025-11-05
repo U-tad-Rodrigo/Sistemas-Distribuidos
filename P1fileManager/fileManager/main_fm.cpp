@@ -1,10 +1,14 @@
+/*Rodrigo Fernández
+* 05/11/2205
+ */
+
 #include <iostream>
 #include <sstream>
-#include "filemanager.h"
+#include "fileManager.h"
 
 int main(int argc,char** argv)
 {
-	FileManager fm("FileManagerDir");
+	FileManager fm("../FileManagerDir");
 	string command;
 	string fileName;
 	string line;

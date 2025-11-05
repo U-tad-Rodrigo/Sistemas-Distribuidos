@@ -1,9 +1,9 @@
-// Autor: [TU NOMBRE AQUÍ]
-// Práctica 1 - Sistemas Distribuidos
-// Servidor del FileManager distribuido
+/*Rodrigo Fernández
+* 05/11/2205
+ */
 
-#include "utils.h"
 #include "clientManager.h"
+#include "utils.h"
 #include <iostream>
 #include <string>
 #include <thread>
@@ -13,12 +13,18 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    cout << "Servidor FileManager iniciado" << endl;
+ bool exit = false;
+ cout<<"Server opening port\n";
+ int serverPortId= initServer(1067);
+ cout<<"Server port opened, waiting for connections\n";
+ while(!exit) {
+  while (!checkClient()) usleep(100);
+  int clientId = getLastClientID();
+  cout<<"Client ID: "<<clientId<<" connected\n";
 
-    // TODO: Iniciar servidor en un puerto
-    // TODO: Esperar conexiones de clientes
-    // TODO: Procesar peticiones remotas
+  thread* th = new thread(clientManager::resolveClientMessages, clientId);
 
-    cout << "Servidor finalizado" << endl;
-    return 0;
+ }
+
+ return 0;
 }
