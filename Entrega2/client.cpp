@@ -1,152 +1,215 @@
-/*
- * client.cpp - Cliente TCP interactivo
- *
- * Funcionalidades:
- * - Conecta a un servidor TCP (IP y puerto configurables)
- * - Envía mensajes del usuario al servidor
- * - Recibe y muestra respuestas y broadcasts del servidor
- * - Comandos especiales: "usuarios" (lista clientes), "exit" (desconectar)
+/*Rodrigo Fernández
+ * 05/11/2025
  */
 
+#include "utils.h"
+#include "clientManager.h"
 #include <iostream>
 #include <string>
 #include <thread>
-#include <cstring>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
 
 using namespace std;
 
-// Variable para controlar el hilo de recepción
-bool conectado = true;
+void enviaMensaje(int id, string mensaje)
+{
+	vector<unsigned char> buffer;
+	//empaquetar tipo
+	pack(buffer,clientManager::texto);
+	//empaquetar mensaje
+	pack(buffer,mensaje.size());
+	packv(buffer,mensaje.data(),mensaje.size());
+	//enviar
+	sendMSG(id,buffer);
+	//esperar ack
+	buffer.clear();
+	recvMSG(id,buffer);
+	if(unpack<int>(buffer)!=clientManager::ack)
+		cout<<"Error enviando mensaje\n";
+}
 
-// Función que recibe mensajes del servidor en un hilo separado
-// Esto permite recibir broadcasts mientras el usuario escribe
-void recibirMensajes(int clientSocket) {
-    char buffer[1024];
+void enviaComandoUsuarios(int id)
+{
+	vector<unsigned char> buffer;
+	//empaquetar tipo
+	pack(buffer,clientManager::usuarios);
+	//enviar
+	sendMSG(id,buffer);
+	//esperar respuesta
+	buffer.clear();
+	recvMSG(id,buffer);
+	clientManager::msgTypes type=unpack<clientManager::msgTypes>(buffer);
+	if(type==clientManager::usuarios){
+		string lista;
+		lista.resize(unpack<long int>(buffer));
+		unpackv(buffer,(char*)lista.data(),lista.size());
+		cout<<lista<<endl;
+	}
+	//esperar ack
+	buffer.clear();
+	recvMSG(id,buffer);
+}
 
-    while (conectado) {
-        memset(buffer, 0, sizeof(buffer));
+void enviaMensajePrivado(int id, int destinatario, string mensaje)
+{
+	vector<unsigned char> buffer;
+	//empaquetar tipo
+	pack(buffer,clientManager::privado);
+	//empaquetar destinatario
+	pack(buffer,destinatario);
+	//empaquetar mensaje
+	pack(buffer,mensaje.size());
+	packv(buffer,mensaje.data(),mensaje.size());
+	//enviar
+	sendMSG(id,buffer);
+	//esperar ack
+	buffer.clear();
+	recvMSG(id,buffer);
+	if(unpack<int>(buffer)!=clientManager::ack)
+		cout<<"Error enviando mensaje privado\n";
+}
 
-        int bytesRecibidos = recv(clientSocket, buffer, sizeof(buffer) - 1, 0);
+void enviaExit(int id)
+{
+	vector<unsigned char> buffer;
+	//empaquetar tipo
+	pack(buffer,clientManager::exit);
+	//enviar
+	sendMSG(id,buffer);
+	//esperar ack
+	buffer.clear();
+	recvMSG(id,buffer);
+}
 
-        if (bytesRecibidos <= 0) {
-            if (conectado) {
-                cerr << "\n[ERROR] Conexión con el servidor perdida" << endl;
-                conectado = false;
-            }
-            break;
-        }
+void recibeMensajes(int serverId, bool &conectado)
+{
+	vector<unsigned char> buffer;
+	while(conectado){
+		//recibir mensaje
+		recvMSG(serverId,buffer);
+		//desempaquetar tipo
+		clientManager::msgTypes type=unpack<clientManager::msgTypes>(buffer);
 
-        buffer[bytesRecibidos] = '\0';
-        cout << buffer << flush;
-    }
+		switch(type){
+			case clientManager::texto:{
+				//desempaquetar id emisor
+				int idEmisor=unpack<int>(buffer);
+				//desempaquetar mensaje
+				string msg;
+				msg.resize(unpack<long int>(buffer));
+				unpackv(buffer,(char*)msg.data(),msg.size());
+				cout<<"cliente "<<idEmisor<<": "<<msg<<endl;
+			}break;
+
+			case clientManager::privado:{
+				//desempaquetar id emisor
+				int idEmisor=unpack<int>(buffer);
+				//desempaquetar mensaje
+				string msg;
+				msg.resize(unpack<long int>(buffer));
+				unpackv(buffer,(char*)msg.data(),msg.size());
+				cout<<"[PRIVADO] cliente "<<idEmisor<<": "<<msg<<endl;
+			}break;
+
+			default:
+				break;
+		}
+		buffer.clear();
+	}
 }
 
 int main(int argc, char** argv) {
-    // Configurar IP y puerto (defaults: 127.0.0.1:5000)
-    string host = "127.0.0.1";
-    int puerto = 5000;
+	string host = "127.0.0.1";
+	int puerto = 5000;
 
-    if (argc >= 2) {
-        host = argv[1];
-    }
-    if (argc >= 3) {
-        puerto = atoi(argv[2]);
-        if (puerto <= 0 || puerto > 65535) {
-            cerr << "Puerto inválido. Usando puerto por defecto: 5000" << endl;
-            puerto = 5000;
-        }
-    }
+	if (argc >= 2) {
+		host = argv[1];
+	}
+	if (argc >= 3) {
+		puerto = atoi(argv[2]);
+		if (puerto <= 0 || puerto > 65535) {
+			cerr << "Puerto invalido. Usando puerto por defecto: 5000" << endl;
+			puerto = 5000;
+		}
+	}
 
-    cout << "========================================" << endl;
-    cout << "       CLIENTE TCP INTERACTIVO" << endl;
-    cout << "========================================" << endl;
-    cout << "Conectando a " << host << ":" << puerto << "..." << endl;
+	cout << "========================================" << endl;
+	cout << "       CLIENTE TCP INTERACTIVO" << endl;
+	cout << "========================================" << endl;
+	cout << "Conectando a " << host << ":" << puerto << "..." << endl;
 
-    // Crear socket del cliente
-    int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (clientSocket < 0) {
-        cerr << "Error al crear socket" << endl;
-        return 1;
-    }
+	connection_t connection = initClient(host, puerto);
 
-    // Configurar dirección del servidor
-    struct sockaddr_in serverAddr;
-    serverAddr.sin_family = AF_INET;
-    serverAddr.sin_port = htons(puerto);
+	if (!connection.alive) {
+		cerr << "Error al conectar con el servidor" << endl;
+		return 1;
+	}
 
-    // Convertir IP de texto a binario
-    if (inet_pton(AF_INET, host.c_str(), &serverAddr.sin_addr) <= 0) {
-        cerr << "Dirección IP inválida: " << host << endl;
-        close(clientSocket);
-        return 1;
-    }
+	int serverId = connection.serverId;
 
-    // Conectar al servidor
-    if (connect(clientSocket, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
-        cerr << "Error al conectar con el servidor" << endl;
-        cerr << "Asegúrate de que el servidor esté ejecutándose en "
-             << host << ":" << puerto << endl;
-        close(clientSocket);
-        return 1;
-    }
+	cout << "Conexion establecida!" << endl;
+	cout << "========================================" << endl;
+	cout << "Comandos disponibles:" << endl;
+	cout << "  - Escribe un mensaje para enviarlo" << endl;
+	cout << "  - 'usuarios' para ver clientes conectados" << endl;
+	cout << "  - 'exit' para desconectar" << endl;
+	cout << "  - '@ID mensaje' para mensaje privado" << endl;
+	cout << "========================================" << endl << endl;
 
-    cout << "¡Conexión establecida!" << endl;
-    cout << "========================================" << endl;
-    cout << "Comandos disponibles:" << endl;
-    cout << "  - Escribe un mensaje para enviarlo" << endl;
-    cout << "  - 'usuarios' para ver clientes conectados" << endl;
-    cout << "  - 'exit' para desconectar" << endl;
-    cout << "  - '@ID mensaje' para mensaje privado" << endl;
-    cout << "========================================" << endl << endl;
+	bool conectado = true;
+	thread* hiloRecepcion = new thread(recibeMensajes, serverId, ref(conectado));
 
-    // Crear hilo para recibir mensajes del servidor
-    thread hiloRecepcion(recibirMensajes, clientSocket);
+	string mensaje;
+	while (conectado) {
+		cout << "> ";
+		if (!getline(cin, mensaje)) {
+			break;
+		}
 
-    // Bucle principal: leer mensajes del usuario
-    string mensaje;
-    while (conectado) {
-        cout << "> ";
-        if (!getline(cin, mensaje)) {
-            // EOF o error en entrada
-            break;
-        }
+		if (mensaje.empty()) {
+			continue;
+		}
 
-        // Ignorar líneas vacías
-        if (mensaje.empty()) {
-            continue;
-        }
+		if (mensaje == "exit") {
+			cout << "Cerrando conexion..." << endl;
+			enviaExit(serverId);
+			conectado = false;
+			break;
+		}
+		else if (mensaje == "usuarios") {
+			enviaComandoUsuarios(serverId);
+		}
+		else if (mensaje[0] == '@') {
+			//mensaje privado
+			size_t espacioPos = mensaje.find(' ');
+			if (espacioPos != string::npos && espacioPos > 1) {
+				string idStr = mensaje.substr(1, espacioPos - 1);
+				string textoMensaje = mensaje.substr(espacioPos + 1);
+				try {
+					int idDestinatario = stoi(idStr);
+					enviaMensajePrivado(serverId, idDestinatario, textoMensaje);
+					cout << "Servidor: mensaje privado enviado a cliente " << idStr << endl;
+				} catch (...) {
+					cout << "Formato incorrecto. Usa: @ID mensaje" << endl;
+				}
+			} else {
+				cout << "Formato incorrecto. Usa: @ID mensaje" << endl;
+			}
+		}
+		else {
+			enviaMensaje(serverId, mensaje);
+			cout << "Servidor: mensaje recibido correctamente." << endl;
+		}
+	}
 
-        // Enviar mensaje al servidor
-        mensaje += "\n";  // Agregar salto de línea
-        int byteEnviados = send(clientSocket, mensaje.c_str(), mensaje.length(), 0);
+	conectado = false;
+	closeConnection(serverId);
 
-        if (byteEnviados <= 0) {
-            cerr << "[ERROR] No se pudo enviar el mensaje" << endl;
-            break;
-        }
+	if (hiloRecepcion->joinable()) {
+		hiloRecepcion->join();
+	}
 
-        // Si el usuario escribió "exit", prepararse para cerrar
-        if (mensaje == "exit\n") {
-            cout << "Cerrando conexión..." << endl;
-            conectado = false;
-            break;
-        }
-    }
+	cout << "Desconectado." << endl;
 
-    // Limpiar y cerrar
-    conectado = false;
-    close(clientSocket);
-
-    // Esperar a que termine el hilo de recepción
-    if (hiloRecepcion.joinable()) {
-        hiloRecepcion.join();
-    }
-
-    cout << "Desconectado." << endl;
-
-    return 0;
+	return 0;
 }
+

@@ -1,3 +1,7 @@
+/*Rodrigo Fernández
+ * 05/11/2025
+ */
+
 #include "utils.h"
 #include <iostream>
 #include <string>
@@ -8,31 +12,27 @@
 
 using namespace std;
 
-
 class clientManager{
 
 public:
 
 	typedef enum{
-		texto=0,
-		exit=1,
-		login=2,
-		ack=3
+		texto,
+		usuarios,
+		privado,
+		exit,
+		ack
 	}msgTypes;
 
-	//variable de cierre de programa:
-	static inline bool cierreDePrograma=false;
-	//recepción asincrona de paquetes en cliente
-	static inline mutex cerrojoBuffers;
-	static inline vector<unsigned char> bufferAcks;
-	static inline vector<unsigned char> bufferTxt;
+	static mutex cerrojoClientes;
+	static map<int,int> clientesConectados;
 
-	static inline map<string,int> connectionIds;
-	static void enviaMensaje(int id, string mensaje);
-	static string desempaquetaTipoTexto(vector<unsigned char> &buffer);
-	static void enviaLogin(int id, string userName);
 	static void atiendeCliente(int clientId);
-	static string recibeMensaje(int serverId);
-	static void reenviaTexto(string userName, string msg);
+	static string desempaquetaTexto(vector<unsigned char> &buffer);
+	static void reenviaTexto(int idEmisor, string msg);
+	static void enviaListaUsuarios(int clientId);
+	static void enviaMensajePrivado(int idEmisor, int idDestinatario, string msg);
+	static string obtenerListaIds();
 
 };
+

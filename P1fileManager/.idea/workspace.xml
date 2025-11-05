@@ -29,66 +29,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/enunciado.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fileManager/FileManagerDir/test1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fileManager/FileManagerDir/test2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/EjemploRPC_Persona.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/copilot.data.migration.ask.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/deployment.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/other.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/client.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/client.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/client2.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/clientManager.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/clientManager.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/persona.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/persona.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/personaDistribuida.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/personaDistribuida.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/server.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/server.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/server2.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/utils.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/utils.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/EJEMPLOS.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/FileManagerDir/test.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/GUIA_INICIO.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/Práctica1 clases remotas-5 (1).txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/RESUMEN_PROYECTO.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/client.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/clientManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/clientManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/clientManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/filemanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/fileManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/main_fm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/main_fm.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/server.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/utils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/utils.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/.idea/editor.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/clientManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/clientManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/clientManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/database.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/database.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/database.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/database.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/distributedDatabase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/distributedDatabase.cpp" afterDir="false" />
+    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="Semi Updates">
+      <change beforePath="$PROJECT_DIR$/../Entrega2/client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/client.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Entrega2/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/clientManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Entrega2/clientManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/clientManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Entrega2/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/server.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,8 +135,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1760307603897</updated>
-      <workItem from="1762365416096" duration="5932000" />
+      <workItem from="1762365416096" duration="6300000" />
     </task>
+    <task id="LOCAL-00001" summary="Semi Updates">
+      <option name="closed" value="true" />
+      <created>1762371382729</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762371382729</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Semi Updates">
+      <option name="closed" value="true" />
+      <created>1762371401449</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1762371401449</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,5 +163,9 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Semi Updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Semi Updates" />
   </component>
 </project>

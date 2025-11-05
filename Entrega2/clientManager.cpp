@@ -1,155 +1,149 @@
+/*Rodrigo Fernández
+ * 05/11/2025
+ */
+
 #include "clientManager.h"
 #include "utils.h"
 
-
-
-
-void clientManager::enviaMensaje(int id, string mensaje)
-{
-	vector<unsigned char> buffer; //para crear un paquete de datos
-	//empaquetar tipo
-	pack(buffer,texto);
-	//empaquetar datos
-		//empaquetar tamaño de string
-	pack(buffer,mensaje.size());
-			//empaquetar datos de string
-	packv(buffer,mensaje.data(),mensaje.size());
-		//enviar datos
-	sendMSG(id,buffer);
-	//recibir respuesta
-		//limpiar buffer
-	//consultar ack
-	while(bufferAcks.size()==0) usleep(100); //espera semidurmiente
-	//leer ack
-	cerrojoBuffers.lock();
-	if(unpack<int>(bufferAcks)!= ack)
-		cout<<"Error enviando mensaje\n";
-	cerrojoBuffers.unlock();
-}
-
-string clientManager::desempaquetaTipoTexto(vector<unsigned char> &buffer){
-
+string clientManager::desempaquetaTexto(vector<unsigned char> &buffer){
 	string mensaje;
-	//para crear un paquete de datos
 	mensaje.resize(unpack<long int>(buffer));
 	unpackv(buffer,(char*)mensaje.data(),mensaje.size());
 	return mensaje;
 }
 
-void clientManager::enviaLogin(int id, string userName){
-
-	//buffer datos
-	vector<unsigned char> buffer;
-	//empaquetar tipo de mensaje
-	pack(buffer,login);
-	//empaquetar metadato
-	pack(buffer,userName.size());
-	//dato
-	packv(buffer, userName.data(),userName.size());
-	//enviar
-	sendMSG(id,buffer);
-	//consultar ack
-	while(bufferAcks.size()==0) usleep(100); //espera semidurmiente
-	//leer ack
-	cerrojoBuffers.lock();
-	if(unpack<int>(bufferAcks)!= ack)
-		cout<<"Error enviando mensaje\n";
-	cerrojoBuffers.unlock();
-
-}
-
-
-void clientManager::atiendeCliente(int clientID)
+void clientManager::atiendeCliente(int clientId)
 {
 	vector<unsigned char> bufferIn;
 	bool salir=false;
-	string userName="default";
+
+	cerrojoClientes.lock();
+	clientesConectados[clientId]=clientId;
+	cerrojoClientes.unlock();
+
 	while(!salir){
-		//recibe paquete datos
-		recvMSG(clientID,bufferIn);
-		//desempaquetar tipo paquete
+		//recibir paquete
+		recvMSG(clientId,bufferIn);
+		//desempaquetar tipo
 		msgTypes type=unpack<msgTypes>(bufferIn);
-		//dependiendo de tipo
+
 		switch(type){
-			//tipo texto
 			case texto:{
 				//desempaquetar mensaje
-				string msg=desempaquetaTipoTexto(bufferIn);
-				//reenviar
-				reenviaTexto(userName,msg);
+				string msg=desempaquetaTexto(bufferIn);
+				//mostrar en servidor
+				cout<<"cliente "<<clientId<<": "<<msg<<endl;
+				//reenviar a otros
+				reenviaTexto(clientId,msg);
 			}break;
-			//tipo exit
+
+			case usuarios:{
+				//enviar lista usuarios
+				enviaListaUsuarios(clientId);
+			}break;
+
+			case privado:{
+				//desempaquetar destinatario
+				int idDestinatario=unpack<int>(bufferIn);
+				//desempaquetar mensaje
+				string msg=desempaquetaTexto(bufferIn);
+				//enviar privado
+				enviaMensajePrivado(clientId,idDestinatario,msg);
+			}break;
+
 			case exit:{
-				//eliminar usuario
-				connectionIds.erase(userName);
 				//cerrar conexión
+				cout<<"[SERVIDOR] Cliente "<<clientId<<" desconectado"<<endl;
 				salir=true;
-			}break;//tipo login
-			case login:{
-				//desempaquetar usuario
-				userName=desempaquetaTipoTexto(bufferIn);
-				//añadir si no existe
-				if(connectionIds.find(userName)==connectionIds.end())
-					connectionIds[userName]=clientID;
-				else
-					salir=true;
 			}break;
+
 			default:{
-			//cualquier otro tipo
-				ERRLOG ("tipo mensaje no válido");
-				//eliminar usuario
-				connectionIds.erase(userName);
-				//cerrar conexión
+				ERRLOG("tipo mensaje no válido");
 				salir=true;
 			}break;
-		};
+		}
 
 		//limpiar buffer
 		bufferIn.clear();
 		//enviar ack
 		pack(bufferIn,ack);
-		sendMSG(clientID,bufferIn);
+		sendMSG(clientId,bufferIn);
 	}
-	closeConnection(clientID);
+
+	cerrojoClientes.lock();
+	clientesConectados.erase(clientId);
+	cerrojoClientes.unlock();
+
+	closeConnection(clientId);
 }
 
-void clientManager::reenviaTexto(string userName, string msg)
+void clientManager::reenviaTexto(int idEmisor, string msg)
 {
-	//empaquetar mensaje
 	vector<unsigned char> bufferOut;
-	pack(bufferOut,texto); //tipo
-	pack(bufferOut,userName.size());
-	packv(bufferOut,userName.data(),userName.size());
+	//empaquetar tipo
+	pack(bufferOut,texto);
+	//empaquetar id emisor
+	pack(bufferOut,idEmisor);
+	//empaquetar mensaje
 	pack(bufferOut,msg.size());
 	packv(bufferOut,msg.data(),msg.size());
 
-	//por cada cliente conectado
-	for(  auto client  : connectionIds){
-		//reenviar paquete
-			//si no soy el emisor
-		if(client.first!=userName)
+	//reenviar a todos menos al emisor
+	cerrojoClientes.lock();
+	for(auto client : clientesConectados){
+		if(client.first!=idEmisor)
 			sendMSG(client.second,bufferOut);
 	}
-	bufferOut.clear();//opcional
-
+	cerrojoClientes.unlock();
 }
 
-string clientManager::recibeMensaje(int serverId){
+string clientManager::obtenerListaIds()
+{
+	string lista="conectados: ";
+	cerrojoClientes.lock();
+	if(clientesConectados.empty()){
+		lista="conectados: ninguno";
+	}else{
+		bool primero=true;
+		for(auto client : clientesConectados){
+			if(!primero) lista+=",";
+			lista+=to_string(client.first);
+			primero=false;
+		}
+	}
+	cerrojoClientes.unlock();
+	return lista;
+}
 
-	//recibir mensaje
-	string userName;
-	string mensaje;
-    vector<unsigned char> buffer;
+void clientManager::enviaListaUsuarios(int clientId)
+{
+	string lista=obtenerListaIds();
+	vector<unsigned char> bufferOut;
+	//empaquetar tipo
+	pack(bufferOut,usuarios);
+	//empaquetar lista
+	pack(bufferOut,lista.size());
+	packv(bufferOut,lista.data(),lista.size());
+	//enviar
+	sendMSG(clientId,bufferOut);
+}
 
-	recvMSG(serverId,buffer);
-	//desempaquetar mensaje reenviado
-		//desepaquetar tipo
-	msgTypes type=unpack<msgTypes>(buffer);
-		//username
-	userName=desempaquetaTipoTexto(buffer);
-		//mensaje
-	mensaje=desempaquetaTipoTexto(buffer);
+void clientManager::enviaMensajePrivado(int idEmisor, int idDestinatario, string msg)
+{
+	vector<unsigned char> bufferOut;
+	//empaquetar tipo
+	pack(bufferOut,privado);
+	//empaquetar id emisor
+	pack(bufferOut,idEmisor);
+	//empaquetar mensaje
+	pack(bufferOut,msg.size());
+	packv(bufferOut,msg.data(),msg.size());
 
-	return userName+":"+mensaje;
+	//buscar destinatario
+	cerrojoClientes.lock();
+	if(clientesConectados.find(idDestinatario)!=clientesConectados.end()){
+		sendMSG(idDestinatario,bufferOut);
+	}
+	cerrojoClientes.unlock();
+}
 
-}//recibir un mensaje
