@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+  </component>
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="fileManager" targetName="server" />
+      <config projectName="fileManager" targetName="fileManager" />
+      <config projectName="fileManager" targetName="client" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug-OpenGL" ENABLED="false" CONFIG_NAME="Debug" TOOLCHAIN_NAME="Visual Studio" GENERATION_OPTIONS="-DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows" />
+      <configuration PROFILE_NAME="Debug-AWS UBUNTU" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="AWS UBUNTU" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/enunciado.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileManager/FileManagerDir/test1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileManager/FileManagerDir/test2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/EjemploRPC_Persona.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/copilot.data.migration.agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/copilot.data.migration.ask.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/copilot.data.migration.ask2agent.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/copilot.data.migration.edit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/deployment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/editor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/client.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/client.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/client2.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/clientManager.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/clientManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/persona.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/persona.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/personaDistribuida.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/personaDistribuida.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/server.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/server.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/server2.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/utils.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../EjemploRPC_Persona/utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/EJEMPLOS.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/FileManagerDir/test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/GUIA_INICIO.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/Práctica1 clases remotas-5 (1).txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/RESUMEN_PROYECTO.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/client.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/clientManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/clientManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/clientManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/filemanager.h" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/fileManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/main_fm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/main_fm.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/server.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/utils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/utils.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/.idea/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/clientManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/clientManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/clientManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/database.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/database.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/database.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/database.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tutorial2_Database/distributedDatabase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Tutorial2_Database/distributedDatabase.cpp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-AWS UBUNTU" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "SkiTemplar"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/U-tad-Rodrigo/Sistemas-Distribuidos.git",
+    "accountId": "a4c7b733-391e-4f1c-8ff8-c4812c9be6bb"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="354NWEiEuItnImeUao5unuFjIgU" />
+  <component name="ProjectStatusUIService"><![CDATA[{
+  "uiKindId": "Widget"
+}]]></component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "CMake Application.fileManager.executor": "Run",
+    "CMake Application.server.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Rodrigo/CARRERA/Workspace/SistemasDistribuidos/P1fileManager",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "web.server",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="CMake Application.fileManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="client" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="client" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="client">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fileManager" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="fileManager" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="fileManager">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="server" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="server" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="server">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.client" />
+      <item itemvalue="CMake Application.fileManager" />
+      <item itemvalue="CMake Application.server" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="" />
+      <created>1760307603897</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1760307603897</updated>
+      <workItem from="1762365416096" duration="5932000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+  </component>
+</project>
