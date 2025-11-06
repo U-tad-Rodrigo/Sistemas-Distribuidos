@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="AWS UBUNTU (7145cbe9-7212-436c-afe1-d450af7564b1)" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="AWS UBUNTU (7145cbe9-7212-436c-afe1-d450af7564b1)" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
     <serverData>
       <paths name="AWS UBUNTU (7145cbe9-7212-436c-afe1-d450af7564b1)">
         <serverdata>
@@ -9,6 +10,8 @@
           </mappings>
           <excludedPaths>
             <excludedPath local="true" path="$PROJECT_DIR$/fileManager/cmake-build-debug-aws-ubuntu" />
+            <excludedPath local="true" path="$PROJECT_DIR$/fileManager/cmake-build-debug-aws-ubuntu" />
+            <excludedPath local="true" path="$PROJECT_DIR$/fileManager/cmake-build-debug-opengl" />
             <excludedPath local="true" path="$PROJECT_DIR$/fileManager/cmake-build-debug-opengl" />
           </excludedPaths>
         </serverdata>

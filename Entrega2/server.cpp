@@ -6,11 +6,35 @@
 #include "utils.h"
 #include <iostream>
 #include <thread>
+#include <signal.h>
 
 using namespace std;
 
+bool servidorActivo = true;
+
+void manejarSenalApagado(int signum) {
+	cout << "\n[SERVIDOR] Recibida señal de apagado (Ctrl+C)" << endl;
+	cout << "[SERVIDOR] Enviando mensaje de cierre a clientes..." << endl;
+
+	servidorActivo = false;
+
+	//enviar mensaje de cierre a todos los clientes
+	clientManager::cerrojoClientes.lock();
+	for(auto client : clientManager::clientesConectados){
+		vector<unsigned char> buffer;
+		pack(buffer, clientManager::exit);
+		sendMSG(client.second, buffer);
+	}
+	clientManager::cerrojoClientes.unlock();
+
+	cout << "[SERVIDOR] Esperando que los clientes se desconecten..." << endl;
+	sleep(2);
+
+	cout << "[SERVIDOR] Apagado completado." << endl;
+	exit(0);
+}
+
 int main(int argc, char** argv) {
-	bool exit = false;
 	int puerto = 5000;
 
 	if (argc >= 2) {
@@ -21,23 +45,26 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	cout << "============================================" << endl;
-	cout << "  SERVIDOR TCP MULTI-CLIENTE CON BROADCAST" << endl;
-	cout << "============================================" << endl;
+	//configurar manejo de señal SIGINT (Ctrl+C)
+	signal(SIGINT, manejarSenalApagado);
+
+	cout << "Servidor TCP Multi-Cliente" << endl;
 	cout << "Puerto: " << puerto << endl;
-	cout << "============================================" << endl;
+	cout << "Presiona Ctrl+C para apagar" << endl;
+	cout << "----------------------------" << endl;
 
-	cout << "Servidor abriendo puerto..." << endl;
 	int serverPortId = initServer(puerto);
-	cout << "Puerto abierto, esperando conexiones..." << endl;
-	cout << "============================================" << endl << endl;
+	cout << "Servidor iniciado, esperando conexiones..." << endl;
 
-	while (!exit) {
-		while (!checkClient()) usleep(100);
+	while (servidorActivo) {
+		while (!checkClient() && servidorActivo) usleep(100);
+		if(!servidorActivo) break;
+
 		int clientId = getLastClientID();
-		cout << "[SERVIDOR] Cliente ID: " << clientId << " conectado" << endl;
+		cout << "[SERVIDOR] Cliente " << clientId << " conectado" << endl;
 
 		thread* th = new thread(clientManager::atiendeCliente, clientId);
+		th->detach();
 	}
 
 	return 0;

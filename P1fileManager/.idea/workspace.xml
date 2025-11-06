@@ -6,9 +6,9 @@
   <component name="BackendCodeEditorMiscSettings">
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
   </component>
-  <component name="CMakePresetLoader"><![CDATA[{
-  "useNewFormat": true
-}]]></component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
   <component name="CMakeProjectFlavorService">
     <option name="flavorId" value="CMakePlainProjectFlavor" />
   </component>
@@ -30,9 +30,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="Semi Updates">
-      <change beforePath="$PROJECT_DIR$/../Entrega2/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Entrega2/Memoria.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/Memoria.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Entrega2/client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/client.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Entrega2/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/clientManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Entrega2/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/server.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/clientManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,32 +51,33 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "SkiTemplar"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SkiTemplar&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/U-tad-Rodrigo/Sistemas-Distribuidos.git",
-    "accountId": "a4c7b733-391e-4f1c-8ff8-c4812c9be6bb"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/U-tad-Rodrigo/Sistemas-Distribuidos.git&quot;,
+    &quot;accountId&quot;: &quot;a4c7b733-391e-4f1c-8ff8-c4812c9be6bb&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 7
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="354NWEiEuItnImeUao5unuFjIgU" />
-  <component name="ProjectStatusUIService"><![CDATA[{
-  "uiKindId": "Widget"
-}]]></component>
+  <component name="ProjectStatusUIService">{
+  &quot;uiKindId&quot;: &quot;Widget&quot;
+}</component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "CMake Application.client.executor": "Run",
     "CMake Application.fileManager.executor": "Run",
     "CMake Application.server.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -96,14 +102,14 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "web.server",
+    "settings.editor.selected.configurable": "CPPToolchains",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="CMake Application.fileManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+  <component name="RunManager" selected="CMake Application.client">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="client" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="client" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="client">
@@ -135,6 +141,8 @@
       <option name="presentableId" value="Default" />
       <updated>1760307603897</updated>
       <workItem from="1762365416096" duration="6785000" />
+      <workItem from="1762417554695" duration="76000" />
+      <workItem from="1762445006352" duration="10259000" />
     </task>
     <task id="LOCAL-00001" summary="Semi Updates">
       <option name="closed" value="true" />

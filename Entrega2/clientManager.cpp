@@ -5,6 +5,9 @@
 #include "clientManager.h"
 #include "utils.h"
 
+mutex clientManager::cerrojoClientes;
+map<int,int> clientManager::clientesConectados;
+
 string clientManager::desempaquetaTexto(vector<unsigned char> &buffer){
 	string mensaje;
 	mensaje.resize(unpack<long int>(buffer));

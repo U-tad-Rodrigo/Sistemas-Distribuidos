@@ -6,28 +6,28 @@
 #include "utils.h"
 #include "clientManager.h"
 
+#define SERVERIP "127.0.0.1"
+#define SERVERPORT 1067
+
+// Mapa local para el cliente (no usar el del servidor)
+static map<FileManager*, int> connectionIds;
 /**
 * @brief FileManager::FileManager Constructor without parameters of the FileManager class (empty). 
 *
 */
 
-FileManager::FileManager()
-{
-	//connect to server
-	int serverId=clientManager::connectionIds[this];
-	//empaquetar tipo
+FileManager::FileManager() {
 	vector<unsigned char> buffer;
-	pack(buffer,constructorFilemanager);
-	//enviar
-	sendMSG(serverId,buffer);
-	//recibir ack
-	buffer.clear();
-	recvMSG(serverId,buffer);
-	//comprobar ack
-	if(unpack<msgTypes>(buffer)!=ack)
-		cout<<"ERROR Respuesta no válida "<<__FILE__<<":"<<__LINE__<<endl;
+	connectionIds[this] = initClient(SERVERIP, SERVERPORT).serverId;
+	int serverId = clientManager::connectionIds[this];
 
-	
+	pack(buffer, constructorFilemanager);
+	sendMSG(serverId, buffer);
+
+	recvMSG(serverId, buffer);
+	if (buffer.size() > 0) {
+		ready = true;
+	}
 }
 
 /**
@@ -35,7 +35,11 @@ FileManager::FileManager()
 *
 */
 FileManager::~FileManager(){
-	
+	int serverID = clientManager::connectionIds[this];
+	vector<unsigned char> buffer;
+	pack(buffer, destructorFilemanager);
+	sendMSG(serverID, buffer);
+	recvMSG(serverID, buffer);
 }
 /**
 * @brief FileManager::FileManager Constructor of the FileManager class. It receives by parameters the directory
@@ -44,20 +48,44 @@ FileManager::~FileManager(){
 *
 * @param path Path to the directory you want to use.
 */
-FileManager::FileManager(string path){}
+FileManager::FileManager(string path) {
+	connectionIds[this] = initClient(SERVERIP, SERVERPORT).serverId;
+	int serverId = clientManager::connectionIds[this];
+	vector<unsigned char> buffer;
+
+	pack(buffer, constructorFilemanagerParams);
+	pack(buffer, (int)path.size());
+	packv(buffer, (unsigned char *)path.data(), (int)path.size());
+
+	sendMSG(serverId, buffer);
+
+	recvMSG(serverId, buffer);
+
+	if (buffer.size() > 0) {
+		ready = true;
+	}
+}
 /**
  * @brief FileManager::listFiles Used to access the list of files stored in the path
  * that was used in the class constructor. Only lists files, directories are ignored.
  * 
  */
 vector<string> FileManager::listFiles(){
-	
+	vector<unsigned char> buffer;
+	int serverId = clientManager::connectionIds[this];
+
+	pack(buffer, listFilesF);
+	sendMSG(serverId, buffer);
+	recvMSG(serverId, buffer);
+
 	vector<string> resultado;
-		//invocar listFiles en servidor
+	resultado.resize(unpack<int>(buffer));
+	for (auto& fileName : resultado) {
+		fileName.resize(unpack<int>(buffer));
+		unpackv(buffer, (char*)fileName.data(), (int)fileName.size());
+	}
 	return resultado;
-	
-	
-	
+
 }
 /**
  * @brief FileManager::readFile Given the name of a file stored in the directory used in the constructor,
@@ -67,10 +95,17 @@ vector<string> FileManager::listFiles(){
  * @param data File data
  */
 void FileManager::readFile(string fileName, vector<unsigned char> &data){
-	
-	
-	
-	
+	int serverId = clientManager::connectionIds[this];
+	vector<unsigned char> buffer;
+	pack(buffer, readFileF);
+	pack(buffer, (int)fileName.size());
+	packv(buffer, (unsigned char *)fileName.data(), (int)fileName.size());
+
+	sendMSG(serverId, buffer);
+	recvMSG(serverId, buffer);
+
+	data.resize(unpack<int>(buffer));
+	unpackv(buffer, data.data(), (int)data.size());
 }
 /**
  * @brief FileManager::writeFile Given a new name of a file to be stored in the directory used in the constructor,
@@ -80,5 +115,14 @@ void FileManager::readFile(string fileName, vector<unsigned char> &data){
  * @param data Data of the file.
  */
 void FileManager::writeFile(string fileName, vector<unsigned char> &data){
-	
+	int serverId = clientManager::connectionIds[this];
+	vector<unsigned char> buffer;
+	pack(buffer, writeFileF);
+	pack(buffer, (int)fileName.size());
+	packv(buffer, (unsigned char *)fileName.data(), (int)fileName.size());
+
+	pack(buffer, (int)data.size());
+	packv(buffer, data.data(), (int)data.size());
+	sendMSG(serverId, buffer);
+	recvMSG(serverId, buffer);
 }

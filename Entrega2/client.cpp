@@ -84,36 +84,56 @@ void recibeMensajes(int serverId, bool &conectado)
 {
 	vector<unsigned char> buffer;
 	while(conectado){
-		//recibir mensaje
-		recvMSG(serverId,buffer);
-		//desempaquetar tipo
-		clientManager::msgTypes type=unpack<clientManager::msgTypes>(buffer);
+		try{
+			//recibir mensaje
+			recvMSG(serverId,buffer);
 
-		switch(type){
-			case clientManager::texto:{
-				//desempaquetar id emisor
-				int idEmisor=unpack<int>(buffer);
-				//desempaquetar mensaje
-				string msg;
-				msg.resize(unpack<long int>(buffer));
-				unpackv(buffer,(char*)msg.data(),msg.size());
-				cout<<"cliente "<<idEmisor<<": "<<msg<<endl;
-			}break;
-
-			case clientManager::privado:{
-				//desempaquetar id emisor
-				int idEmisor=unpack<int>(buffer);
-				//desempaquetar mensaje
-				string msg;
-				msg.resize(unpack<long int>(buffer));
-				unpackv(buffer,(char*)msg.data(),msg.size());
-				cout<<"[PRIVADO] cliente "<<idEmisor<<": "<<msg<<endl;
-			}break;
-
-			default:
+			if(buffer.size() == 0){
+				//conexión cerrada
+				conectado = false;
 				break;
+			}
+
+			//desempaquetar tipo
+			clientManager::msgTypes type=unpack<clientManager::msgTypes>(buffer);
+
+			switch(type){
+				case clientManager::texto:{
+					//desempaquetar id emisor
+					int idEmisor=unpack<int>(buffer);
+					//desempaquetar mensaje
+					string msg;
+					msg.resize(unpack<long int>(buffer));
+					unpackv(buffer,(char*)msg.data(),msg.size());
+					cout<<"cliente "<<idEmisor<<": "<<msg<<endl;
+					cout<<"> "<<flush;
+				}break;
+
+				case clientManager::privado:{
+					//desempaquetar id emisor
+					int idEmisor=unpack<int>(buffer);
+					//desempaquetar mensaje
+					string msg;
+					msg.resize(unpack<long int>(buffer));
+					unpackv(buffer,(char*)msg.data(),msg.size());
+					cout<<"[PRIVADO] cliente "<<idEmisor<<": "<<msg<<endl;
+					cout<<"> "<<flush;
+				}break;
+
+				case clientManager::exit:{
+					//servidor cerrando
+					cout<<"\n[SERVIDOR] Servidor cerrando conexion"<<endl;
+					conectado = false;
+				}break;
+
+				default:
+					break;
+			}
+			buffer.clear();
+		}catch(...){
+			conectado = false;
+			break;
 		}
-		buffer.clear();
 	}
 }
 
@@ -132,9 +152,7 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	cout << "========================================" << endl;
-	cout << "       CLIENTE TCP INTERACTIVO" << endl;
-	cout << "========================================" << endl;
+	cout << "Cliente TCP" << endl;
 	cout << "Conectando a " << host << ":" << puerto << "..." << endl;
 
 	connection_t connection = initClient(host, puerto);
@@ -146,14 +164,9 @@ int main(int argc, char** argv) {
 
 	int serverId = connection.serverId;
 
-	cout << "Conexion establecida!" << endl;
-	cout << "========================================" << endl;
-	cout << "Comandos disponibles:" << endl;
-	cout << "  - Escribe un mensaje para enviarlo" << endl;
-	cout << "  - 'usuarios' para ver clientes conectados" << endl;
-	cout << "  - 'exit' para desconectar" << endl;
-	cout << "  - '@ID mensaje' para mensaje privado" << endl;
-	cout << "========================================" << endl << endl;
+	cout << "Conectado!" << endl;
+	cout << "Comandos: 'usuarios', 'exit', '@ID mensaje' (privado)" << endl;
+	cout << "----------------------------" << endl;
 
 	bool conectado = true;
 	thread* hiloRecepcion = new thread(recibeMensajes, serverId, ref(conectado));
@@ -201,13 +214,10 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	conectado = false;
-	closeConnection(serverId);
-
 	if (hiloRecepcion->joinable()) {
 		hiloRecepcion->join();
 	}
-
+	closeConnection(serverId);
 	cout << "Desconectado." << endl;
 
 	return 0;

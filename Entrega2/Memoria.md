@@ -1,229 +1,210 @@
 # Memoria - Chat Cliente-Servidor
 
-## Qué hace el programa
+## Descripción
 
-Es un chat básico donde un servidor puede tener varios clientes conectados a la vez. Los clientes se envían mensajes entre ellos y el servidor los gestiona.
+Sistema de chat básico con arquitectura cliente-servidor usando TCP. Permite que múltiples clientes se conecten simultáneamente y se comuniquen entre sí.
 
-### Lo que tiene
+### Funcionalidades
 
-- Varios clientes pueden conectarse al mismo tiempo (usa hilos para cada uno)
-- Los mensajes se reenvían a todos los clientes
-- Puedes enviar mensajes privados con `@ID mensaje`
-- El comando `usuarios` te dice quién está conectado
+- Múltiples clientes conectados al mismo tiempo (hilos independientes)
+- Mensajes públicos (broadcast a todos los clientes)
+- Mensajes privados con `@ID mensaje`
+- Comando `usuarios` para listar clientes conectados
+- Apagado ordenado del servidor con Ctrl+C (SIGINT)
+- Desconexión limpia de clientes con `exit`
 
+## Ejecución del programa
 
-## Prueba con 3 clientes
-
-Para probarlo abrí 4 terminales: una para el servidor y tres para los clientes.
-
-### Paso 1: Arrancar el servidor
-
-Primero arranco el servidor y lo dejo esperando:
+### 1. Arrancar el servidor
 
 ```
 $ ./server
-============================================
-  SERVIDOR TCP MULTI-CLIENTE CON BROADCAST
-============================================
+Servidor TCP Multi-Cliente
 Puerto: 5000
-============================================
-Servidor abriendo puerto...
-Puerto abierto, esperando conexiones...
-============================================
-
+Presiona Ctrl+C para apagar
+----------------------------
+Servidor iniciado, esperando conexiones...
 ```
 
-### Paso 2: Conectar los 3 clientes
+El servidor queda esperando conexiones de clientes.
 
-Ahora abro 3 terminales más y ejecuto el cliente en cada una:
+### 2. Conectar clientes
 
-**Cliente 1:**
-```
-$ ./client
-========================================
-       CLIENTE TCP INTERACTIVO
-========================================
-Conectando a 127.0.0.1:5000...
-Conexion establecida!
-========================================
-Comandos disponibles:
-  - Escribe un mensaje para enviarlo
-  - 'usuarios' para ver clientes conectados
-  - 'exit' para desconectar
-  - '@ID mensaje' para mensaje privado
-========================================
+Abrir 3 terminales diferentes y ejecutar el cliente en cada una:
 
->
-```
-
-**Cliente 2:**
+**Terminal Cliente 0:**
 ```
 $ ./client
-========================================
-       CLIENTE TCP INTERACTIVO
-========================================
+Cliente TCP
 Conectando a 127.0.0.1:5000...
-Conexion establecida!
-========================================
-Comandos disponibles:
-  - Escribe un mensaje para enviarlo
-  - 'usuarios' para ver clientes conectados
-  - 'exit' para desconectar
-  - '@ID mensaje' para mensaje privado
-========================================
-
+Intentando crear socket...
+Socket creado: 3
+Convirtiendo direccion IP...
+Intentando conectar a 127.0.0.1:5000...
+Conexion TCP establecida exitosamente
+Cliente registrado con ID: 0
+Conectado!
+Comandos: 'usuarios', 'exit', '@ID mensaje' (privado)
+----------------------------
 > 
-```
-
-**Cliente 3:**
-```
-$ ./client
-========================================
-       CLIENTE TCP INTERACTIVO
-========================================
-Conectando a 127.0.0.1:5000...
-Conexion establecida!
-========================================
-Comandos disponibles:
-  - Escribe un mensaje para enviarlo
-  - 'usuarios' para ver clientes conectados
-  - 'exit' para desconectar
-  - '@ID mensaje' para mensaje privado
-========================================
-
-> 
-```
-
-### Paso 3: Conversación completa
-
-**Terminal del servidor:**
-```
-$ ./server
-============================================
-  SERVIDOR TCP MULTI-CLIENTE CON BROADCAST
-============================================
-Puerto: 5000
-============================================
-Servidor abriendo puerto...
-Puerto abierto, esperando conexiones...
-============================================
-
-[SERVIDOR] Cliente ID: 0 conectado
-[SERVIDOR] Cliente ID: 1 conectado
-[SERVIDOR] Cliente ID: 2 conectado
-cliente 0: Soy el cliente 1, hola!
-cliente 1: Soy el cliente 2, hola!
-cliente 2: Hola desde el cliente 3
-[SERVIDOR] Cliente 2 desconectado
-[SERVIDOR] Cliente 1 desconectado
-[SERVIDOR] Cliente 0 desconectado
 ```
 
 **Terminal Cliente 1:**
 ```
 $ ./client
-========================================
-       CLIENTE TCP INTERACTIVO
-========================================
+Cliente TCP
 Conectando a 127.0.0.1:5000...
-Conexion establecida!
-========================================
-Comandos disponibles:
-  - Escribe un mensaje para enviarlo
-  - 'usuarios' para ver clientes conectados
-  - 'exit' para desconectar
-  - '@ID mensaje' para mensaje privado
-========================================
+Intentando crear socket...
+Socket creado: 3
+Convirtiendo direccion IP...
+Intentando conectar a 127.0.0.1:5000...
+Conexion TCP establecida exitosamente
+Cliente registrado con ID: 1
+Conectado!
+Comandos: 'usuarios', 'exit', '@ID mensaje' (privado)
+----------------------------
+> 
+```
 
-> Soy el cliente 1, hola!
+**Terminal Cliente 2:**
+```
+$ ./client
+Cliente TCP
+Conectando a 127.0.0.1:5000...
+Intentando crear socket...
+Socket creado: 3
+Convirtiendo direccion IP...
+Intentando conectar a 127.0.0.1:5000...
+Conexion TCP establecida exitosamente
+Cliente registrado con ID: 2
+Conectado!
+Comandos: 'usuarios', 'exit', '@ID mensaje' (privado)
+----------------------------
+> 
+```
+
+### 3. Servidor tras las conexiones
+
+```
+$ ./server
+Servidor TCP Multi-Cliente
+Puerto: 5000
+Presiona Ctrl+C para apagar
+----------------------------
+Servidor iniciado, esperando conexiones...
+[SERVIDOR] Cliente 0 conectado
+[SERVIDOR] Cliente 1 conectado
+[SERVIDOR] Cliente 2 conectado
+```
+
+### 4. Conversación entre clientes
+
+**Terminal Servidor:**
+```
+[SERVIDOR] Cliente 0 conectado
+[SERVIDOR] Cliente 1 conectado
+[SERVIDOR] Cliente 2 conectado
+cliente 0: Hola a todos!
+cliente 1: Hola desde cliente 1
+cliente 2: Saludos desde cliente 2
+[SERVIDOR] Cliente 2 desconectado
+[SERVIDOR] Cliente 1 desconectado
+[SERVIDOR] Cliente 0 desconectado
+```
+
+**Terminal Cliente 0:**
+```
+> Hola a todos!
 Servidor: mensaje recibido correctamente.
-> cliente 1: Soy el cliente 2, hola!
-cliente 2: Hola desde el cliente 3
+> cliente 1: Hola desde cliente 1
+cliente 2: Saludos desde cliente 2
 usuarios
 conectados: 0,1,2
-> @2 Este es un mensaje privado para ti
+> @2 Este mensaje es privado para ti
 Servidor: mensaje privado enviado a cliente 2
 > exit
 Cerrando conexion...
 Desconectado.
 ```
 
-**Terminal Cliente 2:**
+**Terminal Cliente 1:**
 ```
-$ ./client
-========================================
-       CLIENTE TCP INTERACTIVO
-========================================
-Conectando a 127.0.0.1:5000...
-Conexion establecida!
-========================================
-Comandos disponibles:
-  - Escribe un mensaje para enviarlo
-  - 'usuarios' para ver clientes conectados
-  - 'exit' para desconectar
-  - '@ID mensaje' para mensaje privado
-========================================
-
-> cliente 0: Soy el cliente 1, hola!
-Soy el cliente 2, hola!
+> cliente 0: Hola a todos!
+Hola desde cliente 1
 Servidor: mensaje recibido correctamente.
-> cliente 2: Hola desde el cliente 3
-[PRIVADO] cliente 0: Este es un mensaje privado para ti
+> cliente 2: Saludos desde cliente 2
 exit
 Cerrando conexion...
 Desconectado.
 ```
 
-**Terminal Cliente 3:**
+**Terminal Cliente 2:**
 ```
-$ ./client
-========================================
-       CLIENTE TCP INTERACTIVO
-========================================
-Conectando a 127.0.0.1:5000...
-Conexion establecida!
-========================================
-Comandos disponibles:
-  - Escribe un mensaje para enviarlo
-  - 'usuarios' para ver clientes conectados
-  - 'exit' para desconectar
-  - '@ID mensaje' para mensaje privado
-========================================
-
-> cliente 0: Soy el cliente 1, hola!
-cliente 1: Soy el cliente 2, hola!
-Hola desde el cliente 3
+> cliente 0: Hola a todos!
+cliente 1: Hola desde cliente 1
+Saludos desde cliente 2
 Servidor: mensaje recibido correctamente.
-> exit
+> [PRIVADO] cliente 0: Este mensaje es privado para ti
+exit
 Cerrando conexion...
 Desconectado.
 
 ```
 
-## Cómo funcionan las cosas
+## Funcionalidades implementadas
 
-### Mensajes privados
+### 1. Mensajes públicos (broadcast)
 
-Para mandar un mensaje a un cliente concreto escribes:
+Cuando un cliente envía un mensaje normal, el servidor lo reenvía a todos los demás clientes conectados (excepto al emisor). El formato es:
+```
+cliente ID: mensaje
+```
+
+### 2. Mensajes privados
+
+Para enviar un mensaje privado a un cliente específico, se usa:
 ```
 @ID mensaje
 ```
 
 Ejemplo: `@2 Hola, esto es privado`
 
-El servidor busca al cliente con ese ID y le envía el mensaje solo a él. El que lo recibe lo ve con `[PRIVADO]` delante.
+El servidor busca al cliente con ese ID y le envía el mensaje solo a él. El receptor lo ve con el prefijo `[PRIVADO]`:
+```
+[PRIVADO] cliente 0: Hola, esto es privado
+```
 
-### Comando usuarios
+### 3. Comando usuarios
 
-Si escribes `usuarios` el servidor te manda la lista de IDs conectados en ese momento.
+Al escribir `usuarios`, el servidor responde con la lista de IDs conectados:
+```
+conectados: 0,1,2
+```
 
-### Desconexión
+### 4. Desconexión limpia (logout)
 
-Cuando escribes `exit`, el cliente cierra la conexión y el servidor lo quita de la lista. Los demás siguen funcionando normal.
+Cuando un cliente escribe `exit`:
+- Envía un mensaje de tipo `exit` al servidor
+- El servidor elimina al cliente de la lista de conectados
+- Cierra la conexión de forma ordenada
+- Los demás clientes continúan funcionando sin problemas
 
+### 5. Apagado ordenado del servidor (SIGINT)
 
-## Resumen
+El servidor puede apagarse ordenadamente con Ctrl+C:
+- Captura la señal SIGINT
+- Envía mensaje de cierre a todos los clientes conectados
+- Los clientes reciben la notificación y cierran sus conexiones
+- El servidor termina después de notificar a todos
 
-El programa funciona con varios clientes a la vez. Cada cliente puede mandar mensajes a todos, mensajes privados a uno solo, ver quién está conectado y desconectarse cuando quiera. El servidor gestiona todo usando hilos.
+## Cómo funciona
+
+El servidor usa hilos (std::thread) para gestionar cada cliente de forma independiente. Cada conexión tiene su propio hilo que:
+- Recibe mensajes del cliente
+- Procesa el tipo de mensaje (texto, privado, usuarios, exit)
+- Ejecuta la acción correspondiente
+- Envía respuestas al cliente
+
+Los tipos de mensajes se empaquetan usando las funciones `pack/unpack` de utils.h, siguiendo el patrón del código de ejemplo proporcionado.
 
 

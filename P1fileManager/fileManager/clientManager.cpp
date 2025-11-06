@@ -66,35 +66,34 @@ void clientManager::resolveClientMessages(int clientId) {
 			}break;
 			case readFileF: {
 				string file;
+				vector<unsigned char> data;
 				//desempaquetar file
 				file.resize(unpack<int>(buffer));
 				unpackv(buffer,(char*)file.data(),(int)file.size());
 
-				instanciasFileManager[clientId].readFile(file, buffer);
+				instanciasFileManager[clientId].readFile(file, data);
 				//enviar resultado
+				buffer.clear();
+				pack(buffer,(int)data.size());
+				packv(buffer,(char*)data.data(),(int)data.size());
 				sendMSG(clientId,buffer);
 			}break;
 			case writeFileF: {
 				string file;
-				vector<string> data;
-				//desempaquetar file
 				file.resize(unpack<int>(buffer));
 				unpackv(buffer,(char*)file.data(),(int)file.size());
 
+				vector<unsigned char> data;
 				data.resize(unpack<int>(buffer));
-				for (auto &file : data) {
-					file.resize(unpack<int>(buffer));
-					unpackv(buffer,(char*)file.data(),(int)file.size());
-				}
-				instanciasFileManager[clientId].writeFile(file, buffer);
-				instanciasFileManager[clientId].writeFile(file, buffer);
-				//enviar ack
+				unpackv(buffer, (char *)data.data(), (int)data.size());
+				instanciasFileManager[clientId].writeFile(file, data);
+
 				buffer.clear();
 				pack(buffer,ack);
 				sendMSG(clientId,buffer);
-				//close connection
-				closeConnection(clientId);
-			}
+			}break;
+			default:
+				break;
 		}
 	} while(!logOut);
 	//close connection
