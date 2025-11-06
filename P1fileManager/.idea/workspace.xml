@@ -29,16 +29,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="Semi Updates">
-      <change beforePath="$PROJECT_DIR$/../Entrega2/Memoria.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/Memoria.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Entrega2/client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/client.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Entrega2/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/clientManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Entrega2/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Entrega2/server.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/clientManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="Almost finished" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,7 +133,7 @@
       <updated>1760307603897</updated>
       <workItem from="1762365416096" duration="6785000" />
       <workItem from="1762417554695" duration="76000" />
-      <workItem from="1762445006352" duration="10259000" />
+      <workItem from="1762445006352" duration="10301000" />
     </task>
     <task id="LOCAL-00001" summary="Semi Updates">
       <option name="closed" value="true" />
@@ -168,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762371876411</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Almost finished">
+      <option name="closed" value="true" />
+      <created>1762456014410</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762456014410</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +180,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Semi Updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Semi Updates" />
+    <MESSAGE value="Almost finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="Almost finished" />
   </component>
 </project>
