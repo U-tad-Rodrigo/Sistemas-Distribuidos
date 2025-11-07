@@ -17,6 +17,7 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
+      <config projectName="fileManager" targetName="broker" />
       <config projectName="fileManager" targetName="server" />
       <config projectName="fileManager" targetName="fileManager" />
       <config projectName="fileManager" targetName="client" />
@@ -29,7 +30,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="Almost finished" />
+    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="Almost finished">
+      <change afterPath="$PROJECT_DIR$/fileManager/broker.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileManager/brokerManager.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileManager/brokerManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/server.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,6 +69,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="354NWEiEuItnImeUao5unuFjIgU" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectStatusUIService">{
   &quot;uiKindId&quot;: &quot;Widget&quot;
 }</component>
@@ -68,6 +81,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "CMake Application.broker.executor": "Run",
     "CMake Application.client.executor": "Run",
     "CMake Application.fileManager.executor": "Run",
     "CMake Application.server.executor": "Run",
@@ -97,13 +111,23 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rodrigo\CARRERA\Workspace\SistemasDistribuidos\P1fileManager\fileManager" />
+    </key>
+  </component>
   <component name="RunManager" selected="CMake Application.client">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="broker" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="broker" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="broker">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="client" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="client" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="client">
+    <configuration name="client" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="client" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="client">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -119,6 +143,7 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="CMake Application.broker" />
       <item itemvalue="CMake Application.client" />
       <item itemvalue="CMake Application.fileManager" />
       <item itemvalue="CMake Application.server" />
@@ -134,6 +159,7 @@
       <workItem from="1762365416096" duration="6785000" />
       <workItem from="1762417554695" duration="76000" />
       <workItem from="1762445006352" duration="10301000" />
+      <workItem from="1762510704123" duration="7409000" />
     </task>
     <task id="LOCAL-00001" summary="Semi Updates">
       <option name="closed" value="true" />
@@ -182,5 +208,16 @@
     <MESSAGE value="Semi Updates" />
     <MESSAGE value="Almost finished" />
     <option name="LAST_COMMIT_MESSAGE" value="Almost finished" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/fileManager/clientManager.h</url>
+          <line>5</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

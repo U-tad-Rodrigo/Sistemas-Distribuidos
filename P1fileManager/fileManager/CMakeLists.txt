@@ -16,16 +16,26 @@ set_target_properties(FileManager PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/"
 )
 
+project(broker LANGUAGES CXX)
+add_executable(broker utils.h utils.cpp broker.cpp brokerManager.cpp brokerManager.h)
+target_link_libraries(broker pthread stdc++fs)
+
 project(server LANGUAGES CXX)
-add_executable(server utils.h utils.cpp server.cpp clientManager.cpp clientManager.h fileManager.h)
+add_executable(server utils.h utils.cpp server.cpp clientManager.cpp clientManager.h brokerManager.h fileManager.h)
 target_link_libraries(server pthread  FileManager stdc++fs)
 
 
 project(client LANGUAGES CXX)
-add_executable(client utils.cpp main_fm.cpp distributedFileManager.cpp clientManager.h fileManager.h)
+add_executable(client utils.cpp main_fm.cpp distributedFileManager.cpp clientManager.h brokerManager.h fileManager.h)
 target_link_libraries(client pthread stdc++fs)
 
 
 project (fileManager)
 add_executable (fileManager main_fm.cpp fileManager.h)
 target_link_libraries(fileManager pthread FileManager stdc++fs)
+
+
+
+
+
+

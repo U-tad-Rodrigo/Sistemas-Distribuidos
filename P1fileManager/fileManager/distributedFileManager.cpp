@@ -5,29 +5,75 @@
 #include "fileManager.h"
 #include "utils.h"
 #include "clientManager.h"
+#include "brokerManager.h"
 
-#define SERVERIP "127.0.0.1"
-#define SERVERPORT 1067
+#define BROKER_IP "127.0.0.1"
+#define BROKER_PORT 1066
 
-// Mapa local para el cliente (no usar el del servidor)
-static map<FileManager*, int> connectionIds;
+static string assignedServerIp = "";
+static int assignedServerPort = 0;
+
+void obtenerServidorDelBroker() {
+    if (!assignedServerIp.empty()) {
+        return;
+    }
+
+    cout << "[CLIENT] Consultando broker para obtener servidor..." << endl;
+    connection_t brokerConn = initClient(BROKER_IP, BROKER_PORT);
+
+    vector<unsigned char> buffer;
+    pack(buffer, CLIENT_CONNECT);
+    sendMSG(brokerConn.serverId, buffer);
+
+    recvMSG(brokerConn.serverId, buffer);
+    brokerMsgTypes response = unpack<brokerMsgTypes>(buffer);
+
+    if (response == ACK_BROKER) {
+        int ipSize = unpack<int>(buffer);
+
+        if (ipSize > 0) {
+            assignedServerIp.resize(ipSize);
+            unpackv(buffer, (char*)assignedServerIp.data(), ipSize);
+            assignedServerPort = unpack<int>(buffer);
+
+            cout << "[CLIENT] Broker asignó servidor: " << assignedServerIp
+                 << ":" << assignedServerPort << endl;
+        } else {
+            cout << "[CLIENT] ERROR: No hay servidores disponibles" << endl;
+        }
+    }
+
+    closeConnection(brokerConn.serverId);
+}
+
 /**
 * @brief FileManager::FileManager Constructor without parameters of the FileManager class (empty). 
 *
 */
 
 FileManager::FileManager() {
+	// Obtener servidor del broker
+	obtenerServidorDelBroker();
+
+	if (assignedServerIp.empty()) {
+		cout << "ERROR: No se pudo obtener servidor del broker" << endl;
+		return;
+	}
+
 	vector<unsigned char> buffer;
-	connectionIds[this] = initClient(SERVERIP, SERVERPORT).serverId;
-	int serverId = clientManager::connectionIds[this];
+	int serverId = initClient(assignedServerIp, assignedServerPort).serverId;
+
+	// IMPORTANTE: Guardar la conexión en el mapa
+	clientManager::connectionIds[this] = serverId;
 
 	pack(buffer, constructorFilemanager);
 	sendMSG(serverId, buffer);
 
 	recvMSG(serverId, buffer);
-	if (buffer.size() > 0) {
-		ready = true;
+	if (unpack<msgTypes>(buffer) != ack) {
+		cout << "ERROR: FileManager::FileManager No ack received from server\n";
 	}
+
 }
 
 /**
@@ -40,6 +86,9 @@ FileManager::~FileManager(){
 	pack(buffer, destructorFilemanager);
 	sendMSG(serverID, buffer);
 	recvMSG(serverID, buffer);
+	if (unpack<msgTypes>(buffer)!= ack) {
+		cout << "Error in destructor file manager" << endl;
+	}
 }
 /**
 * @brief FileManager::FileManager Constructor of the FileManager class. It receives by parameters the directory
@@ -49,8 +98,19 @@ FileManager::~FileManager(){
 * @param path Path to the directory you want to use.
 */
 FileManager::FileManager(string path) {
-	connectionIds[this] = initClient(SERVERIP, SERVERPORT).serverId;
-	int serverId = clientManager::connectionIds[this];
+	// Obtener servidor del broker
+	obtenerServidorDelBroker();
+
+	if (assignedServerIp.empty()) {
+		cout << "ERROR: No se pudo obtener servidor del broker" << endl;
+		return;
+	}
+
+	int serverId = initClient(assignedServerIp, assignedServerPort).serverId;
+
+	// IMPORTANTE: Guardar la conexión en el mapa
+	clientManager::connectionIds[this] = serverId;
+
 	vector<unsigned char> buffer;
 
 	pack(buffer, constructorFilemanagerParams);
@@ -60,15 +120,15 @@ FileManager::FileManager(string path) {
 	sendMSG(serverId, buffer);
 
 	recvMSG(serverId, buffer);
-
-	if (buffer.size() > 0) {
-		ready = true;
+	if (unpack<msgTypes>(buffer) != ack) {
+		cout << "ERROR: FileManager::FileManager No ack received from server\n";
 	}
+
 }
 /**
  * @brief FileManager::listFiles Used to access the list of files stored in the path
  * that was used in the class constructor. Only lists files, directories are ignored.
- * 
+ *
  */
 vector<string> FileManager::listFiles(){
 	vector<unsigned char> buffer;
@@ -125,4 +185,7 @@ void FileManager::writeFile(string fileName, vector<unsigned char> &data){
 	packv(buffer, data.data(), (int)data.size());
 	sendMSG(serverId, buffer);
 	recvMSG(serverId, buffer);
+	if (unpack<msgTypes>(buffer) != ack) {
+		cout << "ERROR: FileManager::writeFile No ack received from server\n";
+	}
 }
