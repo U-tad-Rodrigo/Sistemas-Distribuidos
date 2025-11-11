@@ -85,7 +85,7 @@ void clientManager::resolveClientMessages(int clientId) {
 
 				vector<unsigned char> data;
 				data.resize(unpack<int>(buffer));
-				unpackv(buffer, (char *)data.data(), (int)data.size());
+				unpackv(buffer, (char*)data.data(), (int)data.size());
 				instanciasFileManager[clientId].writeFile(file, data);
 
 				buffer.clear();

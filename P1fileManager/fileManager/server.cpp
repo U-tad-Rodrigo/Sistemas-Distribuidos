@@ -23,18 +23,11 @@ int brokerConnectionId = -1;
 void sendKeepAlive() {
     while(true) {
         sleep(KEEP_ALIVE_INTERVAL);
-
-        if (brokerConnectionId != -1) {
-            vector<unsigned char> buffer;
-            pack(buffer, ACK_BROKER); // Keep-alive es un ACK_BROKER
-            sendMSG(brokerConnectionId, buffer);
-
-            // Esperar respuesta
-            recvMSG(brokerConnectionId, buffer);
-            if (unpack<brokerMsgTypes>(buffer) == ACK_BROKER) {
-                cout << "[SERVER] Keep-alive enviado al broker" << endl;
-            }
-        }
+        connection_t brokerConn = initClient(BROKER_IP, BROKER_PORT);
+        vector<unsigned char> buffer;
+        pack(buffer, ACK_BROKER);
+        sendMSG(brokerConn.serverId, buffer);
+        closeConnection(brokerConn.serverId);
     }
 }
 

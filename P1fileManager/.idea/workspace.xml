@@ -30,14 +30,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="Almost finished">
-      <change afterPath="$PROJECT_DIR$/fileManager/broker.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fileManager/brokerManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fileManager/brokerManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="FileManagerUpdated">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/distributedFileManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/brokerManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/brokerManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/clientManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/clientManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileManager/main_fm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/main_fm.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fileManager/server.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/fileManager/server.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,19 +105,22 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CPPToolchains",
+    "settings.editor.selected.configurable": "web.server",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Rodrigo\CARRERA\Workspace\SistemasDistribuidos\P1fileManager\fileManager" />
+      <recent name="C:\Users\Rodrigo\CARRERA\Workspace\SistemasDistribuidos\P1fileManager" />
+      <recent name="C:\Users\Rodrigo\CARRERA\Workspace\SistemasDistribuidos\P1fileManager\fileManager\cmake-build-debug-aws-ubuntu\CMakeFiles" />
+      <recent name="C:\Users\Rodrigo\CARRERA\Workspace\SistemasDistribuidos\P1fileManager\fileManager\cmake-build-debug-aws-ubuntu" />
     </key>
   </component>
-  <component name="RunManager" selected="CMake Application.client">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+  <component name="RunManager" selected="CMake Application.server">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="broker" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="broker" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="broker">
@@ -159,7 +160,8 @@
       <workItem from="1762365416096" duration="6785000" />
       <workItem from="1762417554695" duration="76000" />
       <workItem from="1762445006352" duration="10301000" />
-      <workItem from="1762510704123" duration="7409000" />
+      <workItem from="1762510704123" duration="8839000" />
+      <workItem from="1762876901957" duration="7283000" />
     </task>
     <task id="LOCAL-00001" summary="Semi Updates">
       <option name="closed" value="true" />
@@ -193,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762456014410</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="FileManagerUpdated">
+      <option name="closed" value="true" />
+      <created>1762518166498</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1762518166498</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,7 +217,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Semi Updates" />
     <MESSAGE value="Almost finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="Almost finished" />
+    <MESSAGE value="FileManagerUpdated" />
+    <option name="LAST_COMMIT_MESSAGE" value="FileManagerUpdated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
