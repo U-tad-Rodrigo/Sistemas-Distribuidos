@@ -12,8 +12,10 @@ void brokerManager::resolveBrokerMessages(int connectionId) {
     vector<unsigned char> buffer;
 
     // Recibir mensaje
-    if (!recvMSG(connectionId, buffer)) {
-        // Error de conexión - limpiar si era un servidor registrado
+    recvMSG(connectionId, buffer);
+
+    // Si el buffer está vacío, hubo un error de conexión
+    if (buffer.empty()) {
         lock_guard<mutex> lock(serversMutex);
         if (servidoresRegistrados.find(connectionId) != servidoresRegistrados.end()) {
             cout << "[BROKER] Servidor ID: " << connectionId << " desconectado (error de red)" << endl;
