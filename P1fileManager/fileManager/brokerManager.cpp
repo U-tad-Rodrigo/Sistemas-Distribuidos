@@ -11,30 +11,45 @@
 void brokerManager::resolveBrokerMessages(int connectionId) {
     vector<unsigned char> buffer;
 
-        // Recibir mensaje
-        recvMSG(connectionId, buffer);
-        brokerMsgTypes type = unpack<brokerMsgTypes>(buffer);
+    // Recibir mensaje
+    if (!recvMSG(connectionId, buffer)) {
+        // Error de conexión - limpiar si era un servidor registrado
+        lock_guard<mutex> lock(serversMutex);
+        if (servidoresRegistrados.find(connectionId) != servidoresRegistrados.end()) {
+            cout << "[BROKER] Servidor ID: " << connectionId << " desconectado (error de red)" << endl;
+            servidoresRegistrados.erase(connectionId);
+            cout << "[BROKER] Total servidores: " << servidoresRegistrados.size() << endl;
+        }
+        closeConnection(connectionId);
+        return;
+    }
+
+    brokerMsgTypes type = unpack<brokerMsgTypes>(buffer);
 
     switch(type) {
         case SERVER_CONNECT: {
             ServerInfo info;
             info.ip.resize(unpack<int>(buffer));
             unpackv(buffer, (char*)info.ip.data(), info.ip.size());
-
             info.port = unpack<int>(buffer);
             info.numClients = 0;
             info.keepAliveCounter = 0;
             info.alive = true;
 
-            servidoresRegistrados[connectionId] = info;
-
-            cout << "[BROKER] Servidor registrado - ID: " << connectionId
-                 << " IP: " << info.ip << ":" << info.port << endl;
-            cout << "[BROKER] Total servidores: " << servidoresRegistrados.size() << endl;
+            {
+                lock_guard<mutex> lock(serversMutex);
+                servidoresRegistrados[connectionId] = info;
+                cout << "[BROKER] Servidor registrado - ID: " << connectionId
+                     << " IP: " << info.ip << ":" << info.port << endl;
+                cout << "[BROKER] Total servidores: " << servidoresRegistrados.size() << endl;
+            }
 
             buffer.clear();
             pack(buffer, ACK_BROKER);
             sendMSG(connectionId, buffer);
+
+            // Cerrar - servidor se reconecta para keep-alive
+            closeConnection(connectionId);
             break;
         }
 
@@ -45,55 +60,65 @@ void brokerManager::resolveBrokerMessages(int connectionId) {
             pack(buffer, ACK_BROKER);
 
             if (serverConnId != -1) {
-                ServerInfo& info = servidoresRegistrados[serverConnId];
+                lock_guard<mutex> lock(serversMutex);
+                if (servidoresRegistrados.find(serverConnId) != servidoresRegistrados.end()) {
+                    ServerInfo& info = servidoresRegistrados[serverConnId];
+                    info.numClients++;
 
-                info.numClients++;
+                    cout << "[BROKER] Cliente solicita servidor - Asignado: "
+                         << info.ip << ":" << info.port
+                         << " (Clientes: " << info.numClients << ")" << endl;
 
-                cout << "[BROKER] Cliente solicita servidor - Asignado: "
-                     << info.ip << ":" << info.port
-                     << " (Clientes: " << info.numClients << ")" << endl;
-
-                pack(buffer, (int)info.ip.size());
-                packv(buffer, (unsigned char*)info.ip.data(), (int)info.ip.size());
-                pack(buffer, info.port);
+                    pack(buffer, (int)info.ip.size());
+                    packv(buffer, (unsigned char*)info.ip.data(), (int)info.ip.size());
+                    pack(buffer, info.port);
+                } else {
+                    cout << "[BROKER] ERROR: Servidor seleccionado ya no existe" << endl;
+                    pack(buffer, (int)0);
+                    pack(buffer, (int)0);
+                }
             } else {
                 cout << "[BROKER] ERROR: No hay servidores disponibles" << endl;
-                pack(buffer, (int)0); // IP vacía
-                pack(buffer, (int)0); // Puerto 0
+                pack(buffer, (int)0);
+                pack(buffer, (int)0);
             }
 
             sendMSG(connectionId, buffer);
+
+            // Cerrar - cliente solo consulta
+            closeConnection(connectionId);
             break;
         }
+
         case ACK_BROKER: {
-            if (servidoresRegistrados.find(connectionId) != servidoresRegistrados.end()) {
-                servidoresRegistrados[connectionId].keepAliveCounter = 0;
-                servidoresRegistrados[connectionId].alive = true;
-                cout << "[BROKER] Keep-alive recibido del servidor ID: " << connectionId << endl;
+            {
+                lock_guard<mutex> lock(serversMutex);
+                if (servidoresRegistrados.find(connectionId) != servidoresRegistrados.end()) {
+                    servidoresRegistrados[connectionId].keepAliveCounter = 0;
+                    servidoresRegistrados[connectionId].alive = true;
+                    cout << "[BROKER] Keep-alive recibido del servidor ID: " << connectionId << endl;
+                }
             }
 
             buffer.clear();
             pack(buffer, ACK_BROKER);
             sendMSG(connectionId, buffer);
+
+            // Cerrar - keep-alive temporal
+            closeConnection(connectionId);
             break;
         }
 
         default:
             cout << "[BROKER] Tipo de mensaje desconocido" << endl;
+            closeConnection(connectionId);
             break;
     }
-
-
-    if (servidoresRegistrados.find(connectionId) != servidoresRegistrados.end()) {
-        cout << "[BROKER] Servidor ID: " << connectionId << " desconectado" << endl;
-        servidoresRegistrados.erase(connectionId);
-        cout << "[BROKER] Total servidores: " << servidoresRegistrados.size() << endl;
-    }
-
-    closeConnection(connectionId);
 }
 
 int brokerManager::findServerWithLessClients() {
+    lock_guard<mutex> lock(serversMutex);
+
     if (servidoresRegistrados.empty()) {
         return -1;
     }
@@ -115,23 +140,17 @@ void brokerManager::keepAliveMonitor() {
     while(true) {
         sleep(5);
 
-        vector<int> serverIds;
+        lock_guard<mutex> lock(serversMutex);
+
         for (auto& pair : servidoresRegistrados) {
-            serverIds.push_back(pair.first);
-        }
+            pair.second.keepAliveCounter++;
 
-        for (int serverId : serverIds) {
-            if (servidoresRegistrados.find(serverId) == servidoresRegistrados.end()) {
-                continue;
-            }
-
-            servidoresRegistrados[serverId].keepAliveCounter++;
-
-            if (servidoresRegistrados[serverId].keepAliveCounter > KEEP_ALIVE_MAX_COUNT) {
-                if (servidoresRegistrados[serverId].alive) {
-                    cout << "[BROKER] TIMEOUT: Servidor ID " << serverId
-                         << " marcado como no disponible (sin keep-alive)" << endl;
-                    servidoresRegistrados[serverId].alive = false;
+            if (pair.second.keepAliveCounter > KEEP_ALIVE_MAX_COUNT) {
+                if (pair.second.alive) {
+                    cout << "[BROKER] TIMEOUT: Servidor ID " << pair.first
+                         << " (" << pair.second.ip << ":" << pair.second.port
+                         << ") marcado como no disponible" << endl;
+                    pair.second.alive = false;
                 }
             }
         }

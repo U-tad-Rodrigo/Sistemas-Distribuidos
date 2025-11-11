@@ -6,6 +6,7 @@
 #include "utils.h"
 #include <string>
 #include <map>
+#include <mutex>
 
 using namespace std;
 
@@ -26,6 +27,7 @@ typedef struct {
 class brokerManager {
 public:
     static inline map<int, ServerInfo> servidoresRegistrados;
+    static inline mutex serversMutex;
 
     static void resolveBrokerMessages(int connectionId);
     static int findServerWithLessClients();
