@@ -26,7 +26,10 @@ void sendKeepAlive() {
         connection_t brokerConn = initClient(BROKER_IP, BROKER_PORT);
         vector<unsigned char> buffer;
         pack(buffer, ACK_BROKER);
+        pack(buffer, brokerConnectionId);
         sendMSG(brokerConn.serverId, buffer);
+        buffer.clear();
+        recvMSG(brokerConn.serverId, buffer);
         closeConnection(brokerConn.serverId);
     }
 }

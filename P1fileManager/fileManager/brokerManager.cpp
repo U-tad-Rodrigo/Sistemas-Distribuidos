@@ -94,11 +94,11 @@ void brokerManager::resolveBrokerMessages(int connectionId) {
 
         case ACK_BROKER: {
             {
+                int ogServerId = unpack<int>(buffer);
                 lock_guard<mutex> lock(serversMutex);
-                if (servidoresRegistrados.find(connectionId) != servidoresRegistrados.end()) {
-                    servidoresRegistrados[connectionId].keepAliveCounter = 0;
-                    servidoresRegistrados[connectionId].alive = true;
-                    cout << "[BROKER] Keep-alive recibido del servidor ID: " << connectionId << endl;
+                if (servidoresRegistrados.find(ogServerId) != servidoresRegistrados.end()) {
+                    servidoresRegistrados[ogServerId].keepAliveCounter = 0;
+                    servidoresRegistrados[ogServerId].alive = true;
                 }
             }
 
