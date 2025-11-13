@@ -20,11 +20,10 @@ typedef enum{
 
 class clientManager{
 public:
-	
-
-
+	//USAR EN CLIENTE
 	static inline map<FileManager*, int> connectionIds;
-	static inline map<int,FileManager> instanciasFileManager; //mapa para servidor
+	//USAR EN SERVER
+	static inline map<int,FileManager> instanciasFileManager;
 
 	static void resolveClientMessages(int clientId);
 	

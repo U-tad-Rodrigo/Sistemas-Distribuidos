@@ -17,8 +17,6 @@ void clientManager::resolveClientMessages(int clientId) {
 			case constructorFilemanager: {
 				FileManager fm;
 				instanciasFileManager[clientId]=fm;
-				//asociar id conexion
-				connectionIds[&instanciasFileManager[clientId]]=clientId;
 
 				//enviar ack
 				buffer.clear();
@@ -33,8 +31,7 @@ void clientManager::resolveClientMessages(int clientId) {
 				unpackv(buffer,(char*)path.data(),(int)path.size());
 				fm=FileManager(path);
 				instanciasFileManager[clientId]=fm;
-				//asociar id conexion
-				connectionIds[&instanciasFileManager[clientId]]=clientId;
+
 
 				buffer.clear();
 				pack(buffer,ack);

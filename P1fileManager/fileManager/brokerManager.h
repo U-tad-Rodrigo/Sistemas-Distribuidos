@@ -26,6 +26,7 @@ typedef struct {
 
 class brokerManager {
 public:
+    // USAR EN BROKER (Server)
     static inline map<int, ServerInfo> servidoresRegistrados;
     static inline mutex serversMutex;
 

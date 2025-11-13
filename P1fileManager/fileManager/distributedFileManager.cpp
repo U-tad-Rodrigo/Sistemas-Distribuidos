@@ -62,8 +62,6 @@ FileManager::FileManager() {
 
 	vector<unsigned char> buffer;
 	int serverId = initClient(assignedServerIp, assignedServerPort).serverId;
-
-	// IMPORTANTE: Guardar la conexión en el mapa
 	clientManager::connectionIds[this] = serverId;
 
 	pack(buffer, constructorFilemanager);
