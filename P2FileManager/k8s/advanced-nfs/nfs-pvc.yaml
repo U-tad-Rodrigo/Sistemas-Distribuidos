@@ -1,0 +1,14 @@
+# Autor: Rodrigo - Práctica 2 Sistemas Distribuidos
+# PersistentVolumeClaim para solicitar almacenamiento NFS
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: filemanager-nfs-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+

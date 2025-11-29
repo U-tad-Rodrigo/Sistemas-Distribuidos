@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="fileManager" targetName="broker" />
+      <config projectName="fileManager" targetName="server" />
+      <config projectName="fileManager" targetName="fileManager" />
+      <config projectName="fileManager" targetName="client" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug-OpenGL" ENABLED="false" CONFIG_NAME="Debug" TOOLCHAIN_NAME="Visual Studio" GENERATION_OPTIONS="-DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows" />
+      <configuration PROFILE_NAME="Debug-AWS UBUNTU" ENABLED="true" CONFIG_NAME="Debug" TOOLCHAIN_NAME="AWS UBUNTU" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="FileManagerUpdated">
+      <change afterPath="$PROJECT_DIR$/CONCEPTOS_CLAVE_EXAMEN.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DIAGRAMAS_FLUJO.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileManager/brokerManager_test.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileManager/broker_test.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fileManager/test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../P1fileManager/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../P1fileManager/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-AWS UBUNTU" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;SkiTemplar&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/U-tad-Rodrigo/Sistemas-Distribuidos.git&quot;,
+    &quot;accountId&quot;: &quot;a4c7b733-391e-4f1c-8ff8-c4812c9be6bb&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/fileManager/broker.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fileManager/brokerManager.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fileManager/clientManager.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fileManager/clientManager.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fileManager/distributedFileManager.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fileManager/fileManager.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/fileManager/server.cpp" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="354NWEiEuItnImeUao5unuFjIgU" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectStatusUIService">{
+  &quot;uiKindId&quot;: &quot;Widget&quot;
+}</component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "CMake Application.broker.executor": "Run",
+    "CMake Application.client.executor": "Run",
+    "CMake Application.fileManager.executor": "Run",
+    "CMake Application.server.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.RadMigrateCodeStyle": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "RunOnceActivity.west.config.association.type.startup.service": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Rodrigo/CARRERA/Workspace/SistemasDistribuidos/P1fileManager Apuntes",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.completions.CompletionsConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rodrigo\CARRERA\Workspace\SistemasDistribuidos\P1fileManager\fileManager" />
+      <recent name="C:\Users\Rodrigo\CARRERA\Workspace\SistemasDistribuidos\P1fileManager" />
+      <recent name="C:\Users\Rodrigo\CARRERA\Workspace\SistemasDistribuidos\P1fileManager\fileManager\cmake-build-debug-aws-ubuntu\CMakeFiles" />
+      <recent name="C:\Users\Rodrigo\CARRERA\Workspace\SistemasDistribuidos\P1fileManager\fileManager\cmake-build-debug-aws-ubuntu" />
+    </key>
+  </component>
+  <component name="RunManager" selected="CMake Application.broker">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="broker" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="broker" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="broker">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="client" type="CMakeRunConfiguration" factoryName="Application" singleton="false" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="client" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="client">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="fileManager" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="fileManager" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="fileManager">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="server" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="fileManager" TARGET_NAME="server" CONFIG_NAME="Debug-AWS UBUNTU" RUN_TARGET_PROJECT_NAME="fileManager" RUN_TARGET_NAME="server">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.broker" />
+      <item itemvalue="CMake Application.client" />
+      <item itemvalue="CMake Application.fileManager" />
+      <item itemvalue="CMake Application.server" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="27056016-85f7-4b82-b874-b363330cf8bf" name="Changes" comment="" />
+      <created>1760307603897</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1760307603897</updated>
+      <workItem from="1762365416096" duration="6785000" />
+      <workItem from="1762417554695" duration="76000" />
+      <workItem from="1762445006352" duration="10301000" />
+      <workItem from="1762510704123" duration="8839000" />
+      <workItem from="1762876901957" duration="7283000" />
+      <workItem from="1762972831760" duration="2545000" />
+      <workItem from="1763053204060" duration="8353000" />
+      <workItem from="1763063676930" duration="1522000" />
+      <workItem from="1763068287869" duration="661000" />
+      <workItem from="1763107140244" duration="7108000" />
+    </task>
+    <task id="LOCAL-00001" summary="Semi Updates">
+      <option name="closed" value="true" />
+      <created>1762371382729</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762371382729</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Semi Updates">
+      <option name="closed" value="true" />
+      <created>1762371401449</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1762371401449</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Semi Updates">
+      <option name="closed" value="true" />
+      <created>1762371876411</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1762371876411</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Almost finished">
+      <option name="closed" value="true" />
+      <created>1762456014410</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762456014410</updated>
+    </task>
+    <task id="LOCAL-00005" summary="FileManagerUpdated">
+      <option name="closed" value="true" />
+      <created>1762518166498</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1762518166498</updated>
+    </task>
+    <task id="LOCAL-00006" summary="FileManagerUpdated">
+      <option name="closed" value="true" />
+      <created>1762888630903</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1762888630903</updated>
+    </task>
+    <task id="LOCAL-00007" summary="FileManagerUpdated">
+      <option name="closed" value="true" />
+      <created>1763062085623</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1763062085623</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Semi Updates" />
+    <MESSAGE value="Almost finished" />
+    <MESSAGE value="FileManagerUpdated" />
+    <option name="LAST_COMMIT_MESSAGE" value="FileManagerUpdated" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

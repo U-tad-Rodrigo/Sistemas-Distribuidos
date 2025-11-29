@@ -1,0 +1,5 @@
+This is a sample text file located in the FileManagerDir directory. It contains random text for testing purposes.
+o El programa broker ofrecerá un servicio de localización de objetos fileManager
+// remotos.
+// o Los programas cliente se conectarán al broker para localizar un objeto
+// fileManager remoto y realizarán las operaciones sobre él.

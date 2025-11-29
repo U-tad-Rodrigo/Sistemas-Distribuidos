@@ -1,0 +1,36 @@
+# Autor: Rodrigo - Práctica 2 Sistemas Distribuidos
+# Deployment básico para los servers
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+  labels:
+    app: server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+      - name: server-container
+        image: skitemplar/server-filemanager:v1
+        command: ["/serverFileManager"]
+        args:
+        - "$(BROKER_SERVICE_SERVICE_HOST)"
+        - "32002"
+        - "$(MY_NODE_IP)"
+        - "32001"
+        env:
+        - name: MY_NODE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        ports:
+        - containerPort: 32001
+

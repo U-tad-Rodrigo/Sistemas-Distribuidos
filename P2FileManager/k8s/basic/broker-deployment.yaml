@@ -1,0 +1,25 @@
+# Autor: Rodrigo - Práctica 2 Sistemas Distribuidos
+# Deployment para el broker
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broker-deployment
+  labels:
+    app: broker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broker
+  template:
+    metadata:
+      labels:
+        app: broker
+    spec:
+      containers:
+      - name: broker-container
+        image: skitemplar/broker-filemanager:v1
+        ports:
+        - containerPort: 32002
+

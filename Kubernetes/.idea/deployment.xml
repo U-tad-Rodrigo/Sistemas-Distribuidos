@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="AWS UBUNTU (7145cbe9-7212-436c-afe1-d450af7564b1)" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
+    <serverData>
+      <paths name="2_AWS UBUNTU">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/ubuntu" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="AWS UBUNTU (7145cbe9-7212-436c-afe1-d450af7564b1)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/ubuntu" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
