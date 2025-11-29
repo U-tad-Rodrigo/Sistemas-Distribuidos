@@ -1,0 +1,3 @@
+chmod 400 labsuser.pem
+chmod u+x *.sh
+./kub_deploy.sh

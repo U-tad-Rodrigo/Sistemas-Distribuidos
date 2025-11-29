@@ -52,7 +52,6 @@ void obtenerServidorDelBroker() {
 */
 
 FileManager::FileManager() {
-	// Obtener servidor del broker
 	obtenerServidorDelBroker();
 
 	if (assignedServerIp.empty()) {
@@ -96,7 +95,6 @@ FileManager::~FileManager(){
 * @param path Path to the directory you want to use.
 */
 FileManager::FileManager(string path) {
-	// Obtener servidor del broker
 	obtenerServidorDelBroker();
 
 	if (assignedServerIp.empty()) {

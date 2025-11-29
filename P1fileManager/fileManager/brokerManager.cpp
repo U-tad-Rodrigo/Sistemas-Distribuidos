@@ -10,11 +10,8 @@
 
 void brokerManager::resolveBrokerMessages(int connectionId) {
     vector<unsigned char> buffer;
-
-    // Recibir mensaje
     recvMSG(connectionId, buffer);
 
-    // Si el buffer está vacío, hubo un error de conexión
     if (buffer.empty()) {
         lock_guard<mutex> lock(serversMutex);
         if (servidoresRegistrados.find(connectionId) != servidoresRegistrados.end()) {
@@ -50,7 +47,6 @@ void brokerManager::resolveBrokerMessages(int connectionId) {
             pack(buffer, ACK_BROKER);
             sendMSG(connectionId, buffer);
 
-            // Cerrar - servidor se reconecta para keep-alive
             closeConnection(connectionId);
             break;
         }
@@ -87,7 +83,6 @@ void brokerManager::resolveBrokerMessages(int connectionId) {
 
             sendMSG(connectionId, buffer);
 
-            // Cerrar - cliente solo consulta
             closeConnection(connectionId);
             break;
         }
@@ -106,7 +101,6 @@ void brokerManager::resolveBrokerMessages(int connectionId) {
             pack(buffer, ACK_BROKER);
             sendMSG(connectionId, buffer);
 
-            // Cerrar - keep-alive temporal
             closeConnection(connectionId);
             break;
         }

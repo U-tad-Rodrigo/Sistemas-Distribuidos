@@ -24,14 +24,12 @@ int main(int argc, char** argv)
     keepAliveThread.detach();
     cout << "[BROKER] Thread keep-alive iniciado" << endl << endl;
 
-    // Loop principal: aceptar conexiones
     while(true) {
         while (!checkClient()) usleep(100);
 
         int connectionId = getLastClientID();
         cout << "\n[BROKER] Nueva conexión ID: " << connectionId << endl;
 
-        // Crear thread para manejar esta conexión
         thread* th = new thread(brokerManager::resolveBrokerMessages, connectionId);
         th->detach();
     }

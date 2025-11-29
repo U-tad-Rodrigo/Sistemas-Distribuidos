@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 
  sendMSG(brokerConnectionId, buffer);
 
- // Esperar ACK
+
  recvMSG(brokerConnectionId, buffer);
  if (unpack<brokerMsgTypes>(buffer) == ACK_BROKER) {
      cout << "[SERVER] Registrado en broker correctamente" << endl;
