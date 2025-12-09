@@ -1,0 +1,31 @@
+# Autor: Rodrigo - Práctica 2 Sistemas Distribuidos
+# PersistentVolume con NFS para compartir entre nodos
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: filemanager-nfs-pv
+spec:
+  storageClassName: storage-nfs
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 172.31.64.246
+    path: /export/k8s-files-filemanager
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc
+spec:
+  storageClassName: storage-nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+

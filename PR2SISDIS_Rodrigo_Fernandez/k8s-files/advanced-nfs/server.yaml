@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-filemanager-deployment
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: serverfilemanager
+  template:
+    metadata:
+      labels:
+        app: serverfilemanager
+    spec:
+      containers:
+        - name: server-container
+          image: skitemplar/server-filemanager:v1
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "====================================="
+              echo "Iniciando servidor FileManager..."
+              echo "====================================="
+              
+              # Instalar curl si no existe
+              if ! command -v curl &> /dev/null; then
+                echo "Instalando curl..."
+                apt-get update -qq && apt-get install -y -qq curl
+              fi
+              
+              # Obtener IP del nodo donde corre este pod
+              echo "Obteniendo IP publica del nodo..."
+              export PUBLIC_IP=$(curl -s https://checkip.amazonaws.com)
+              
+              if [ -z "$PUBLIC_IP" ]; then
+                echo "ERROR: No se pudo obtener la IP publica"
+                exit 1
+              fi
+              
+              echo "IP Publica: $PUBLIC_IP"
+              
+              # Obtener IP del broker desde el servicio
+              echo "Resolviendo IP del Broker..."
+              BROKER_IP=$(getent hosts broker-service | awk '{ print $1 }')
+              
+              if [ -z "$BROKER_IP" ]; then
+                echo "WARN: No se pudo resolver broker-service, usando variable de entorno"
+                BROKER_IP=${BROKER_SERVICE_SERVICE_HOST:-"broker-service"}
+              fi
+              
+              echo "Broker IP: $BROKER_IP"
+              echo "Broker Puerto: 32002"
+              echo "Mi IP Publica: $PUBLIC_IP"
+              echo "Mi Puerto: 32001"
+              echo "====================================="
+              
+              # Verificar que el binario existe
+              if [ ! -f /serverFileManager ]; then
+                echo "ERROR: El binario /serverFileManager no existe"
+                exit 1
+              fi
+              
+              # Verificar que el directorio existe
+              if [ ! -d /FileManagerDir ]; then
+                echo "WARN: Directorio /FileManagerDir no existe, creando..."
+                mkdir -p /FileManagerDir
+              fi
+              
+              echo "Ejecutando: /serverFileManager $BROKER_IP 32002 $PUBLIC_IP 32001"
+              exec /serverFileManager $BROKER_IP 32002 $PUBLIC_IP 32001
+          ports:
+            - containerPort: 32001
+          volumeMounts:
+            - mountPath: /FileManagerDir
+              name: directorio-filemanager-nfs
+      volumes:
+        - name: directorio-filemanager-nfs
+          persistentVolumeClaim:
+            claimName: nfs-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: server-service
+spec:
+  type: NodePort
+  selector:
+    app: serverfilemanager
+  ports:
+  - port: 32001
+    targetPort: 32001
+    nodePort: 32001
+    protocol: TCP
+  externalTrafficPolicy: Cluster
